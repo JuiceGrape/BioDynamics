@@ -35,6 +35,11 @@ public class BioBlockSapling extends BioBlock implements IPlantable {
 	}
 	
 	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbor) {
+		this.checkBlockStay(world, x, y, z);
+	}
+	
+	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		if (this.canBlockStay(world, x, y, z)) {
 			return super.canPlaceBlockAt(world, x, y, z);

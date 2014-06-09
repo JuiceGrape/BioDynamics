@@ -38,7 +38,7 @@ public class BlockRedstoneWater extends BioLiquid {
 	 @Override
 	 @SideOnly(Side.CLIENT)
 	 public int colorMultiplier(IBlockAccess world, int x, int y, int z){
-		 return 0xE82020;
+		 return 0xFF0000;
 	 }
 
 }
