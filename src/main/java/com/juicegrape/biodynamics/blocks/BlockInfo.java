@@ -9,5 +9,8 @@ public class BlockInfo {
 	
 	public static final String ENERTREESAPLING = "enertree_sapling";
 	
+	public static final String REDSTONEWATER = "redstonewater";
+	public static final String REDSTONEWATERFLUID = "waterRedstone";
+	
 	
 }
