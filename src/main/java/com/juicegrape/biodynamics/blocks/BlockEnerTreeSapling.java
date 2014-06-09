@@ -9,46 +9,13 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
 import com.juicegrape.biodynamics.blocks.common.BioBlock;
+import com.juicegrape.biodynamics.blocks.common.BioBlockSapling;
 
-public class BlockEnerTreeSapling extends BioBlock implements IPlantable {
+public class BlockEnerTreeSapling extends BioBlockSapling {
 
 	protected BlockEnerTreeSapling() {
-		super(Material.plants, BlockInfo.ENERTREESAPLING);
-		setTickRandomly(true);
-	}
-
-	@Override
-	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z) {
-		return EnumPlantType.Plains;
-	}
-
-	@Override
-	public Block getPlant(IBlockAccess world, int x, int y, int z) {
-		return this;
-	}
-
-	@Override
-	public int getPlantMetadata(IBlockAccess world, int x, int y, int z) {
-		return this.getDamageValue((World)world, x, y, z);
-	}
-	
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        return null;
-    }
-	
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-	
-	@Override
-	public int getRenderType() {
-		return 1;
+		super(BlockInfo.ENERTREESAPLING, EnumPlantType.Plains);
+		float f = 0.4F;
+        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 	}
 }
