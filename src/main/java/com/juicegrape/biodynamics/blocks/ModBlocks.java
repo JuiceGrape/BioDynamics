@@ -10,6 +10,8 @@ public class ModBlocks {
 	public static Block enerTreeSapling;
 	public static Fluid fluidRedstoneWater;
 	public static Block redstoneWater;
+	public static Block enertreeLeaves;
+	public static Block enertreeLogs;
 	
 	
 	
@@ -23,6 +25,13 @@ public class ModBlocks {
 		
 		redstoneWater = new BlockRedstoneWater(fluidRedstoneWater, BlockInfo.REDSTONEWATER);
 		GameRegistry.registerBlock(redstoneWater, BlockInfo.REDSTONEWATER);
+		
+		enertreeLeaves = new BlockEnerTreeLeaves();
+		GameRegistry.registerBlock(enertreeLeaves, BlockInfo.ENERTREELEAVES);
+		
+		enertreeLogs = new BlockEnerTreeLogs();
+		GameRegistry.registerBlock(enertreeLogs, BlockInfo.ENERTREELOGS);
+		
 
 	}
 

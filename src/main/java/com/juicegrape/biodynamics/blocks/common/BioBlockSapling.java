@@ -14,12 +14,16 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BioBlockSapling extends BioBlock implements IPlantable {
 	
 	EnumPlantType type;
+	public int maxHeight;
+	public int minHeight;
 	
 	protected BioBlockSapling(String name, EnumPlantType type) {
 		super(Material.plants, name);
 		this.setStepSound(Block.soundTypeGrass);
 		this.type = type;
 		this.setTickRandomly(true);
+		maxHeight = 5;
+		minHeight = 3;
 	}
 	
 	@Override
@@ -50,15 +54,15 @@ public class BioBlockSapling extends BioBlock implements IPlantable {
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random) {
 		if (canBlockStay(world, x, y, z)) {
-			for (int i = 0; i < 3; i++) {
+			for (int i = 1; i < minHeight; i++) {
 				if (!world.isAirBlock(x, y + i, z)) {
 					return;
 				}
-				if (world.getBlockMetadata(x, y, z) >= 7) {
-					growTree(world, x, y, z);
-				} else {
-					world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) + 1, 4);
-				}
+			}
+			if (world.getBlockMetadata(x, y, z) >= 7) {
+				growTree(world, x, y, z);
+			} else {
+				world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) + 1, 4);
 			}
 		} else {
 			this.checkBlockStay(world, x, y, z);

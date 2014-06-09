@@ -1,7 +1,6 @@
 package com.juicegrape.biodynamics;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -9,6 +8,7 @@ import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.config.ConfigHandler;
 import com.juicegrape.biodynamics.items.ModItems;
 import com.juicegrape.biodynamics.network.BucketHandler;
+import com.juicegrape.biodynamics.network.ModEventHandler;
 import com.juicegrape.biodynamics.proxies.CommonProxy;
 
 import cpw.mods.fml.common.Mod;
@@ -49,11 +49,14 @@ public class biodynamics {
 	public void init(FMLInitializationEvent event) {
 		
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(ModEventHandler.instance);
 
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		
+		
 
 	}
 
