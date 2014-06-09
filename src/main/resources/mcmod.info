@@ -1,0 +1,22 @@
+[
+{
+    "modid" : "biodynamics",
+    "name" : "BioDynamics",
+    "version" : "alpha 0.1",
+    "credits" : "JuiceGrape, Othlon",
+    "authorList" : [
+ "JuiceGrape"
+],
+    "authors" : [
+ "JuiceGrape"
+],
+    "description" : "A mod that adds a symbiotic relationship between technology and nature.",
+    "url" : "",
+    "updateUrl" : "",
+    "logoFile" : "",
+    "parent" : "",
+    "screenshots" : [
+	""
+     ]
+}
+]
