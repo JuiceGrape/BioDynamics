@@ -3,6 +3,7 @@ package com.juicegrape.biodynamics.blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -32,12 +33,12 @@ public class BlockRedstoneWater extends BioLiquid {
      public void registerBlockIcons(IIconRegister register) {
              stillIcon = register.registerIcon("water_still");
              flowingIcon = register.registerIcon("water_flow");
-     }
+	 }
 	 
 	 @Override
 	 @SideOnly(Side.CLIENT)
-	 public int getRenderColor(int p_149741_1_){
-	        return 0xFC4949;
+	 public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_){
+		 return 0xE82020;
 	 }
 
 }
