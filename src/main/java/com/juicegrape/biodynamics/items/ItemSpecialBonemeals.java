@@ -4,11 +4,14 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
+import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.items.common.BioItem;
 
 import cpw.mods.fml.relauncher.Side;
@@ -49,6 +52,45 @@ public class ItemSpecialBonemeals extends BioItem {
 	
 	public String getUnlocalizedName(ItemStack itemStack) {
         return this.getUnlocalizedName() + itemStack.getItemDamage();
+    }
+	
+	@Override
+	public boolean onEntityItemUpdate(EntityItem entityItem) {
+		if (entityItem.worldObj.isRemote)
+			return false;
+		ItemStack item = entityItem.getEntityItem();
+		if (item.getItemDamage() == 0) {
+			double x = entityItem.posX - (entityItem.posX % 1);
+			if (entityItem.posX < 0)
+				x--;
+			double y = entityItem.posY - (entityItem.posY % 1);
+			if (entityItem.posY  <= 0)
+				y--;
+			double z = entityItem.posZ - (entityItem.posZ % 1);
+			if (entityItem.posZ <= 0)
+				z--;
+			
+			System.out.println(x);
+			System.out.println(y);
+			System.out.println(z);
+			System.out.println("-----------------------------------------------------------");
+			
+			if (entityItem.worldObj.getBlock((int)x, (int)y, (int)z).equals(Blocks.water)
+					&& entityItem.worldObj.getBlockMetadata((int)x, (int)y, (int)z) == 0
+					) {
+				System.out.println("yes");
+				if (item.stackSize == 1) {
+					entityItem.setDead();
+				} else {
+					item.stackSize--;
+				}
+				
+				entityItem.worldObj.setBlock((int)x, (int)y, (int)z, ModBlocks.redstoneWater);
+				
+				
+			}
+		}
+        return false;
     }
 	
 

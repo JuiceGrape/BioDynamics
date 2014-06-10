@@ -58,11 +58,16 @@ public class BlockRedstoneWater extends BioLiquid {
 				 for (int j = -5; j <= 5; j++) {
 					 Block sapling = world.getBlock(checkx + i, checky, checkz + j);
 					 if (sapling != null) {
-						 if (random.nextInt(50) == 1 && !(sapling instanceof BlockEnerTreeSapling) &&
+						 if (
+								 random.nextInt(20) == 1 && 
+								 !(sapling instanceof BlockEnerTreeSapling) &&
 								OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(sapling))).equals(
 								OreDictionary.getOreName(OreDictionary.getOreID(sap)) )) {
 							 
-							 continue;
+							 world.setBlock(checkx + i, checky, checkz + j, ModBlocks.enerTreeSapling);
+							 world.setBlock(x, y, z, Blocks.water);
+							 
+							 return;
 						 }
 					 }
 				 }
