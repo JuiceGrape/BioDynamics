@@ -10,6 +10,7 @@ public class BlockInfo {
 	public static final String ENERTREESAPLING = "enertree_sapling";
 	public static final String ENERTREELEAVES = "enertree_leaves";
 	public static final String ENERTREELOGS = "enertree_logs";
+	public static final String ENERTREEPLANKS = "enertree_planks";
 	
 	public static final String REDSTONEWATER = "redstonewater";
 	public static final String REDSTONEWATERFLUID = REDSTONEWATER + "_liquid";

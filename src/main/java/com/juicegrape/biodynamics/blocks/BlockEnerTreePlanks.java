@@ -1,23 +1,28 @@
 package com.juicegrape.biodynamics.blocks;
 
-import net.minecraft.block.BlockLog;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.juicegrape.biodynamics.biodynamics;
+import com.juicegrape.biodynamics.blocks.common.BioBlock;
 import com.juicegrape.biodynamics.blocks.common.energy.IEnergyTransferer;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockEnerTreeLogs extends BlockLog {
+public class BlockEnerTreePlanks extends BioBlock implements IEnergyTransferer {
+
+	protected BlockEnerTreePlanks(String name) {
+		super(Material.wood, name);
+	}
 	
-	public BlockEnerTreeLogs() {
-		super();
-		this.setBlockName(BlockInfo.ENERTREELOGS);
-		this.setCreativeTab(biodynamics.bioTab);
+	
+
+	@Override
+	public int getTransferRate(World world, int x, int y, int z) {
+		return 100;
 	}
 	
 	@Override
@@ -39,7 +44,7 @@ public class BlockEnerTreeLogs extends BlockLog {
 	 
 	 @Override
 	 public IIcon getIcon(int var1, int var2) {
-		 return Blocks.log.getIcon(var1, var2);
+		 return Blocks.planks.getIcon(var1, var2);
 	 }
 
 }

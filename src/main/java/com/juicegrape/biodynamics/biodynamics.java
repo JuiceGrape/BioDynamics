@@ -10,6 +10,7 @@ import com.juicegrape.biodynamics.items.ModItems;
 import com.juicegrape.biodynamics.network.BucketHandler;
 import com.juicegrape.biodynamics.network.ModEventHandler;
 import com.juicegrape.biodynamics.proxies.CommonProxy;
+import com.juicegrape.biodynamics.recipes.CommonRecipes;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -47,6 +48,8 @@ public class biodynamics {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		
+		CommonRecipes.initCommonRecipes();
 		
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModEventHandler.instance);
