@@ -50,6 +50,7 @@ public class biodynamics {
 	public void init(FMLInitializationEvent event) {
 		
 		CommonRecipes.initCommonRecipes();
+		proxy.registerTileEntities();
 		
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModEventHandler.instance);

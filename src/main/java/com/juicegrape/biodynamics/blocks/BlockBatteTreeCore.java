@@ -13,7 +13,7 @@ import com.juicegrape.biodynamics.tileentity.TileEntityBatteTreeCore;
 public class BlockBatteTreeCore extends BioTileEntityBlock implements IEnergySupplier, IEnergyReceiver {
 
 	protected BlockBatteTreeCore(String name) {
-		super(Material.wood, name, new TileEntityBatteTreeCore(10000));
+		super(Material.wood, name);
 	}
 
 	@Override

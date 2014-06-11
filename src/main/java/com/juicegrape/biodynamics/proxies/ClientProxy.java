@@ -6,5 +6,10 @@ public class ClientProxy extends CommonProxy {
 	public boolean isClient() {
 		return true;
 	}
+	
+	@Override
+	public void registerTileEntities() {
+		super.registerTileEntities();;
+	}
 
 }

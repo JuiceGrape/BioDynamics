@@ -16,6 +16,7 @@ public class ModBlocks {
 	public static Block enertreeLeaves;
 	public static Block enertreeLogs;
 	public static Block enertreePlanks;
+	public static Block enertreeFurnace;
 	
 	
 	
@@ -41,6 +42,9 @@ public class ModBlocks {
 		
 		enertreePlanks = new BlockEnerTreePlanks(BlockInfo.ENERTREEPLANKS);
 		GameRegistry.registerBlock(enertreePlanks, BlockInfo.ENERTREEPLANKS);
+		
+		enertreeFurnace = new BlockEnerTreeFurnace(BlockInfo.ENERTREEFURNACE);
+		GameRegistry.registerBlock(enertreeFurnace, BlockInfo.ENERTREEFURNACE);
 		
 		addOreDict();
 		
