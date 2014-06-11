@@ -13,9 +13,14 @@ import com.juicegrape.biodynamics.items.ModItems;
 
 public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 	
+	
 	public TileEntityEnerTreeFurnace() {
+		this(ModBlocks.enertreeFurnace.getUnlocalizedName() + ".name");
+	}
+	
+	public TileEntityEnerTreeFurnace(String name) {
 		super();
-		this.func_145951_a(ModBlocks.enertreeFurnace.getUnlocalizedName() + ".name");
+		this.func_145951_a(name);
 	}
 	
 	@Override
