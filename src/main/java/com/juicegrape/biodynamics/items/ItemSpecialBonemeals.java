@@ -72,11 +72,6 @@ public class ItemSpecialBonemeals extends BioItem {
 			if (entityItem.posZ <= 0)
 				z--;
 			
-			System.out.println(x);
-			System.out.println(y);
-			System.out.println(z);
-			System.out.println("-----------------------------------------------------------");
-			
 			if (entityItem.worldObj.getBlock((int)x, (int)y, (int)z).equals(Blocks.water)
 					&& entityItem.worldObj.getBlockMetadata((int)x, (int)y, (int)z) == 0
 					) {
@@ -88,6 +83,7 @@ public class ItemSpecialBonemeals extends BioItem {
 				}
 				
 				entityItem.worldObj.setBlock((int)x, (int)y, (int)z, ModBlocks.redstoneWater);
+				entityItem.worldObj.markBlockForUpdate((int)x, (int)y, (int)z);
 				
 				
 			}

@@ -50,6 +50,9 @@ public class BlockRedstoneWater extends BioLiquid {
 	 
 	 @Override
 	 public void updateTick(World world, int x, int y, int z, Random random) {
+		 super.updateTick(world, x, y, z, random);
+		 if (world.isRemote)
+			 return;
 		 int checkx = x;
 		 int checky = y + 1;
 		 int checkz = z;
@@ -66,6 +69,7 @@ public class BlockRedstoneWater extends BioLiquid {
 							 
 							 world.setBlock(checkx + i, checky, checkz + j, ModBlocks.enerTreeSapling);
 							 world.setBlock(x, y, z, Blocks.water);
+							 world.markBlockForUpdate(x, y, z);
 							 
 							 return;
 						 }
