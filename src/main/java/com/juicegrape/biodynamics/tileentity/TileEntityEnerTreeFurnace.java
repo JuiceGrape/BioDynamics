@@ -1,15 +1,17 @@
 package com.juicegrape.biodynamics.tileentity;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.items.ModItems;
+import com.juicegrape.biodynamics.misc.OreDictionaryHelper;
 
 public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 	
@@ -50,6 +52,28 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 	
 	public static boolean isItemFuel(ItemStack stack) {
 		return getItemBurnTime(stack) > 0;
+	}
+	
+	@Override
+	public void smeltItem() {
+		/*if (this.canSmelt()){
+			if (OreDictionaryHelper.isStackEqual(getStackInSlot(0), new ItemStack(Blocks.sapling))) {
+				this.getStackInSlot(0).stackSize--;
+				if (getStackInSlot(0).stackSize <= 0) {
+					setInventorySlotContents(0, null);
+				}
+				ItemStack stack = this.getStackInSlot(2);
+				if (stack == null) {
+					stack = new ItemStack(ModBlocks.enerTreeSapling);
+				} else {
+					stack.stackSize++;
+				}
+				setInventorySlotContents(2, stack);
+			}
+		} */
+		super.smeltItem();
+		
+		
 	}
 	
 	public void updateEntity() {
@@ -99,6 +123,7 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 			if (flag1) {
 				this.markDirty();
 			}
+			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 		}
 		
 	}
@@ -110,13 +135,28 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
         }
         else
         {
-            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.getStackInSlot(0));
+        	ItemStack itemstack;
+          /*  if (OreDictionaryHelper.isStackEqual(this.getStackInSlot(0), new ItemStack(Blocks.sapling))) {
+            	itemstack = new ItemStack(ModBlocks.enerTreeSapling); 
+            } else { */
+            	itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.getStackInSlot(0));
+        //    }
             if (itemstack == null) return false;
             if (this.getStackInSlot(2) == null) return true;
             if (!this.getStackInSlot(2).isItemEqual(itemstack)) return false;
             int result = getStackInSlot(2).stackSize + itemstack.stackSize;
             return result <= getInventoryStackLimit() && result <= this.getStackInSlot(2).getMaxStackSize();
         }
+	}
+	
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		if(slot == 2) {
+			return false;
+		} else if (slot == 1){
+			return true;
+		} else {
+			return true;
+		}
 	}
 
 }
