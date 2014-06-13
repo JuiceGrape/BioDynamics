@@ -1,0 +1,15 @@
+Blocks=
+tile.enertree_sapling.name=Enertree Sapling
+tile.enertree_leaves.name=Enertree Leaves
+tile.enertree_logs.name=Enertree Logs
+tile.enertree_planks.name=Enertree Planks
+tile.enertree_furnace.name=Enertree Furnace
+tile.redstonewater.name=Redstone Water
+
+Items=
+item.redstonewater_bucket.name=Redstone Water Bucket
+item.specialbonemeal0.name=Redstone Bonemeal
+item.specialbonemeal1.name=Gold Bonemeal
+
+Misc=
+itemGroup.biodynamics=BioDynamics
