@@ -1,5 +1,7 @@
 package com.juicegrape.biodynamics.tileentity;
 
+import net.minecraft.client.resources.Language;
+import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -13,11 +15,13 @@ import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.items.ModItems;
 import com.juicegrape.biodynamics.misc.OreDictionaryHelper;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
+
 public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 	
 	
 	public TileEntityEnerTreeFurnace() {
-		this(ModBlocks.enertreeFurnace.getUnlocalizedName() + ".name");
+		this(LanguageRegistry.instance().getStringLocalization(ModBlocks.enertreeFurnace.getUnlocalizedName() + ".name"));
 	}
 	
 	public TileEntityEnerTreeFurnace(String name) {
@@ -136,11 +140,7 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
         else
         {
         	ItemStack itemstack;
-          /*  if (OreDictionaryHelper.isStackEqual(this.getStackInSlot(0), new ItemStack(Blocks.sapling))) {
-            	itemstack = new ItemStack(ModBlocks.enerTreeSapling); 
-            } else { */
-            	itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.getStackInSlot(0));
-        //    }
+            itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.getStackInSlot(0));
             if (itemstack == null) return false;
             if (this.getStackInSlot(2) == null) return true;
             if (!this.getStackInSlot(2).isItemEqual(itemstack)) return false;

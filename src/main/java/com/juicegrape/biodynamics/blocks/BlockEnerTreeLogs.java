@@ -23,7 +23,7 @@ public class BlockEnerTreeLogs extends BlockLog {
 	@Override
 	@SideOnly(Side.CLIENT)
     public int getBlockColor() {
-		return 0x4F4747;
+		return 0x3B3232;
 	}
 	 
 	 @Override
@@ -34,12 +34,12 @@ public class BlockEnerTreeLogs extends BlockLog {
 	 
 	 @SideOnly(Side.CLIENT)
 	 public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-		 return this.getBlockColor();
-	 }
+		 return this.getRenderColor(world.getBlockMetadata(x, y, z));
+	 } 
 	 
 	 @Override
 	 public IIcon getIcon(int var1, int var2) {
-		 return Blocks.log.getIcon(var1, var2);
+		 return Blocks.log2.getIcon(var1, var2 + 2);
 	 }
 
 }

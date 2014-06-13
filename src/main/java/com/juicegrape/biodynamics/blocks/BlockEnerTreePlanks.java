@@ -28,7 +28,7 @@ public class BlockEnerTreePlanks extends BioBlock implements IEnergyTransferer {
 	@Override
 	@SideOnly(Side.CLIENT)
     public int getBlockColor() {
-		return 0x4F4747;
+		return ModBlocks.enertreeLogs.getBlockColor();
 	}
 	 
 	 @Override
@@ -44,7 +44,7 @@ public class BlockEnerTreePlanks extends BioBlock implements IEnergyTransferer {
 	 
 	 @Override
 	 public IIcon getIcon(int var1, int var2) {
-		 return Blocks.planks.getIcon(var1, var2);
+		 return Blocks.planks.getIcon(var1, var2 + 6);
 	 }
 
 }
