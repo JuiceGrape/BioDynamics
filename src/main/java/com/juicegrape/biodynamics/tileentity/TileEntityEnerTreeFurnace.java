@@ -1,19 +1,17 @@
 package com.juicegrape.biodynamics.tileentity;
 
-import net.minecraft.client.resources.Language;
-import net.minecraft.client.resources.LanguageManager;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraftforge.oredict.OreDictionary;
 
 import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.items.ModItems;
-import com.juicegrape.biodynamics.misc.OreDictionaryHelper;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -124,14 +122,17 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 				flag1 = true;
 			}
 			
+			
 			if (flag1) {
 				this.markDirty();
 			}
+			
 			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 		}
 		
 	}
 	
+
 	private boolean canSmelt() {
 		if (this.getStackInSlot(0) == null)
         {
@@ -158,5 +159,18 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 			return true;
 		}
 	}
+	
+	@Override
+    public Packet getDescriptionPacket() {
+    	NBTTagCompound nbtTag = new NBTTagCompound();
+    	writeToNBT(nbtTag);
+    	return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
+    	
+    }
+    
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+    	readFromNBT(pkt.func_148857_g());
+    }
 
 }

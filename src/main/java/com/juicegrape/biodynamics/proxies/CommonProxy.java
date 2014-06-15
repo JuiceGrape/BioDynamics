@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 import com.juicegrape.biodynamics.blocks.BlockInfo;
+import com.juicegrape.biodynamics.client.guis.GuiEnerTreeFurnace;
 import com.juicegrape.biodynamics.client.guis.GuiInfo;
 import com.juicegrape.biodynamics.tileentity.ContainerEnerTreeFurnace;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
@@ -33,7 +34,12 @@ public class CommonProxy implements IGuiHandler {
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		return null;
+		switch(ID) {
+		case GuiInfo.GUI_ENERTREEFURNACE_ID:
+			return new GuiEnerTreeFurnace(player.inventory ,(TileEntityEnerTreeFurnace)world.getTileEntity(x, y, z));
+		default:
+			return null;
+		}
 	}
 
 }
