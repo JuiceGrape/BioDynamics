@@ -19,5 +19,15 @@ public class ClientProxy extends CommonProxy {
 		super.registerTileEntities();;
 	}
 	
+	@Override
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		switch(ID) {
+		case GuiInfo.GUI_ENERTREEFURNACE_ID:
+			return new GuiEnerTreeFurnace(player.inventory ,(TileEntityEnerTreeFurnace)world.getTileEntity(x, y, z));
+		default:
+			return null;
+		}
+	}
+	
 
 }

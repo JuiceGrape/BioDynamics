@@ -9,11 +9,11 @@ import com.cofh.api.energy.IEnergyHandler;
 
 public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 	
-	protected EnergyStorage battery;
+	protected EnergyStorage battery = new EnergyStorage(5000);
 	
 	public TileEntityBattery(int stored, int maxIn, int maxOut) {
 		super();
-		battery = new EnergyStorage(stored, maxIn, maxOut);
+	//	battery = new EnergyStorage(stored, maxIn, maxOut);
 	}
 	
 	@Override

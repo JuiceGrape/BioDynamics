@@ -4,6 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.juicegrape.biodynamics.blocks.common.BioTileEntityBlock;
 import com.juicegrape.biodynamics.blocks.common.energy.IEnergyReceiver;
@@ -27,7 +28,7 @@ public class BlockBatteTreeCore extends BioTileEntityBlock {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		TileEntityBatteTreeCore core = (TileEntityBatteTreeCore)world.getTileEntity(x, y, z);
 		if (core != null) {
-			core.printEnergy();
+			System.out.println(core.canConnectEnergy(ForgeDirection.DOWN));
 		}
 		return true;
 	}
