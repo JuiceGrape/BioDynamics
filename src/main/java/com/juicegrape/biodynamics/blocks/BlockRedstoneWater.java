@@ -14,6 +14,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.juicegrape.biodynamics.blocks.common.BioLiquid;
+import com.juicegrape.biodynamics.misc.OreDictionaryHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -64,8 +65,7 @@ public class BlockRedstoneWater extends BioLiquid {
 						 if (
 								 random.nextInt(20) == 1 && 
 								 !(sapling instanceof BlockEnerTreeSapling) &&
-								OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(sapling))).equals(
-								OreDictionary.getOreName(OreDictionary.getOreID(sap)) )) {
+								 OreDictionaryHelper.isStackEqual(new ItemStack(sapling), new ItemStack(Blocks.sapling))) {
 							 
 							 world.setBlock(checkx + i, checky, checkz + j, ModBlocks.enerTreeSapling);
 							 world.setBlock(x, y, z, Blocks.water);
