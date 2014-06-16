@@ -1,13 +1,62 @@
 package com.juicegrape.biodynamics.tileentity.common;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityBattery extends TileEntity {
+import com.cofh.api.energy.EnergyStorage;
+import com.cofh.api.energy.IEnergyHandler;
+
+public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 	
-	private int maxEnergy;
-	private int currentEnergy;
+	protected EnergyStorage battery;
 	
-	public TileEntityBattery(int maxEnergy) {
+	public TileEntityBattery(int stored, int maxIn, int maxOut) {
+		super();
+		battery = new EnergyStorage(stored, maxIn, maxOut);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		battery.readFromNBT(nbt);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+
+		super.writeToNBT(nbt);
+		battery.writeToNBT(nbt);
+	}
+
+	@Override
+	public boolean canConnectEnergy(ForgeDirection from) {
+		return true;
+	}
+
+	@Override
+	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+		return battery.receiveEnergy(maxReceive, simulate);
+	}
+
+	@Override
+	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+		return battery.extractEnergy(maxExtract, simulate);
+	}
+
+	@Override
+	public int getEnergyStored(ForgeDirection from) {
+		return battery.getEnergyStored();
+	}
+
+	@Override
+	public int getMaxEnergyStored(ForgeDirection from) {
+		return battery.getMaxEnergyStored();
+	}
+	
+	
+	
+/*	public TileEntityBattery(int maxEnergy) {
 		this.maxEnergy = maxEnergy;
 		currentEnergy = 0;
 	}
@@ -28,7 +77,7 @@ public class TileEntityBattery extends TileEntity {
 	 * adds energy to the current amount.
 	 * @param energy the amount of energy to add
 	 * @return the amount of energy deficit that cannot be stored because the storage is full.
-	 */
+	 *//*
 	public int addEnergy(int energy) {
 		currentEnergy += energy;
 		int returnEnergy = 0;
@@ -43,7 +92,7 @@ public class TileEntityBattery extends TileEntity {
 	 * removes energy from the current amount.
 	 * @param energy the amount of energy to remove
 	 * @return the amount of energy that can be removed, it returns @param energy if it can remove the full amount.
-	 */
+	 *//*
 	public int removeEnergy(int energy) {
 		int returnEnergy = energy;
 		if (energy > currentEnergy) {
@@ -53,6 +102,6 @@ public class TileEntityBattery extends TileEntity {
 			currentEnergy -= energy;
 		}
 		return returnEnergy;
-	}
+	} */
 
 }

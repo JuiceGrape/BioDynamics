@@ -16,6 +16,8 @@ public class BlockInfo {
 	public static final String REDSTONEWATER = "redstonewater";
 	public static final String REDSTONEWATERFLUID = REDSTONEWATER + "_liquid";
 	
+	public static final String BATTETREECORE = "battetree_core";
+	
 	
 	
 	
