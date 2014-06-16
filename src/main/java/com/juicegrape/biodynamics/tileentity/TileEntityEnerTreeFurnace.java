@@ -17,6 +17,9 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 	
+	private static int[] topSlots = {0, 1};
+	private static int[] bottomSlots = {1,2};
+	
 	
 	public TileEntityEnerTreeFurnace() {
 		this(LanguageRegistry.instance().getStringLocalization(ModBlocks.enertreeFurnace.getUnlocalizedName() + ".name"));
@@ -171,6 +174,19 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
     	readFromNBT(pkt.func_148857_g());
+    } 
+    
+    
+    @Override
+    public int[] getAccessibleSlotsFromSide(int side) {
+      switch (side) {
+      case 0:
+    	  return bottomSlots;
+      case 1:
+    	  return topSlots;
+      default:
+    	return null;
+      }
     }
 
 }
