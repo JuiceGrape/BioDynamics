@@ -3,12 +3,14 @@ package com.juicegrape.biodynamics.client.guis;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import com.juicegrape.biodynamics.tileentity.ContainerEnerTreeFurnace;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -25,7 +27,12 @@ public class GuiEnerTreeFurnace extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		String drawString = furnace.getInventoryName();
+		String drawString;
+		if (!furnace.isInvNameLocalized()) {
+			drawString = LanguageRegistry.instance().getStringLocalization(furnace.getInventoryName());
+		} else {
+			drawString = furnace.getInventoryName();
+		}
 		this.fontRendererObj.drawString(drawString, this.xSize / 2 - this.fontRendererObj.getStringWidth(drawString) / 2, 6, 4210752);
 	}
 

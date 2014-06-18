@@ -1,6 +1,7 @@
 package com.juicegrape.biodynamics.blocks;
 
 import net.minecraft.block.BlockLog;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -14,6 +15,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockEnerTreeLogs extends BlockLog {
 	
+	private IIcon topIcon;
+	private IIcon sideIcon;
+	
 	public BlockEnerTreeLogs() {
 		super();
 		this.setBlockName(BlockInfo.ENERTREELOGS);
@@ -22,24 +26,23 @@ public class BlockEnerTreeLogs extends BlockLog {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public int getBlockColor() {
-		return 0x3B3232;
+	public void registerBlockIcons(IIconRegister register) {
+		topIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_top_block");
+		sideIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_block");
+
 	}
-	 
-	 @Override
-	 @SideOnly(Side.CLIENT)
-	 public int getRenderColor(int meta) {
-		 return this.getBlockColor();
-	 }
-	 
-	 @SideOnly(Side.CLIENT)
-	 public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-		 return this.getRenderColor(world.getBlockMetadata(x, y, z));
-	 } 
-	 
-	 @Override
-	 public IIcon getIcon(int var1, int var2) {
-		 return Blocks.log2.getIcon(var1, var2 + 2);
-	 }
+	
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	protected IIcon getSideIcon(int meta) {
+		return sideIcon;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	protected IIcon getTopIcon(int meta) {
+		return topIcon;
+	}
 
 }

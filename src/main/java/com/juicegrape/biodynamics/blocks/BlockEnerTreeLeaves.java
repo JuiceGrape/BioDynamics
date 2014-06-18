@@ -15,15 +15,29 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockEnerTreeLeaves extends BlockLeaves {
 	
+	private IIcon leaves;
+	private IIcon leaves_Opaque;
+	
 	public BlockEnerTreeLeaves() {
 		super();
 		this.setBlockName(BlockInfo.ENERTREELEAVES);
 		setCreativeTab(biodynamics.bioTab);
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister register) {
+		leaves = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_block");
+		leaves_Opaque = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_opaque_block");
+	}
 
 	@Override
 	public IIcon getIcon(int var1, int var2) {
-		return Blocks.leaves.getIcon(var1, var2);
+		if (this.isOpaqueCube()) {
+			return leaves_Opaque;
+		} else {
+			return leaves;
+		}
 	}
 
 	@Override
@@ -31,27 +45,10 @@ public class BlockEnerTreeLeaves extends BlockLeaves {
 		return new String[]{"enerTree"};
 	}
 
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-    public int getBlockColor() {
-		return 0xFF0000;
-	}
-	 
-	 @Override
-	 @SideOnly(Side.CLIENT)
-	 public int getRenderColor(int meta) {
-		 return this.getBlockColor();
-	 }
-	 
-	 @SideOnly(Side.CLIENT)
-	 public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-		 return this.getBlockColor();
-	 }
 	 
 	 @Override
 	 public boolean isOpaqueCube() {
-		 return false;
+		 return Blocks.leaves.isOpaqueCube();
 	 }
 	 
 	 @Override

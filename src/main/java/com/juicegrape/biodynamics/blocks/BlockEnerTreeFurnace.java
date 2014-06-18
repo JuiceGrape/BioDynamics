@@ -23,6 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockEnerTreeFurnace extends BioTileEntityBlock {
 	
 	IIcon topIcon;
+	IIcon topLitIcon;
 	IIcon sideIcon;
 	IIcon bottomIcon;
 	
@@ -34,10 +35,16 @@ public class BlockEnerTreeFurnace extends BioTileEntityBlock {
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		if (player.isSneaking()) {
+			System.out.println(world.isRemote);
+			System.out.println(world.getBlockMetadata(x, y, z));
+			return true;
+		}
 		TileEntityEnerTreeFurnace furnace = (TileEntityEnerTreeFurnace)world.getTileEntity(x, y, z);
 		if (furnace != null) {
 			player.openGui(biodynamics.instance, GuiInfo.GUI_ENERTREEFURNACE_ID, world, x, y, z);
 		}
+
 		return true;
 	}
 	
@@ -45,6 +52,7 @@ public class BlockEnerTreeFurnace extends BioTileEntityBlock {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		topIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_top_block");
+		topLitIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_lit_top_block");
 		sideIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_side_block");
 		bottomIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_bottom_block");
 	}
@@ -57,30 +65,21 @@ public class BlockEnerTreeFurnace extends BioTileEntityBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-		TileEntityEnerTreeFurnace furnace = (TileEntityEnerTreeFurnace)world.getTileEntity(x, y, z);
-		if (furnace == null) {
-			return;
+		if (world.getBlockMetadata(x, y, z) == 1) {
+			spawnParticles("reddust", world, x, y, z, random);
 		}
-		if (!furnace.isBurning()) {
-			return;
-		}
-		spawnParticles("reddust", world, x, y, z, random);
+		
 		
 	}
 	
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		TileEntityEnerTreeFurnace furnace = (TileEntityEnerTreeFurnace)world.getTileEntity(x, y, z);
-		if (furnace == null) {
-			return 0;
+		if (world.getBlockMetadata(x, y, z) == 1) {
+			return 10;
 		} else {
-			if (furnace.isBurning()) {
-				return 15;
-			} else {
-				return 0;
-			}
+			return 0;
 		}
-	}
+	} 
 	
 	@Override
 	public IIcon getIcon(int side, int meta) {
@@ -88,7 +87,11 @@ public class BlockEnerTreeFurnace extends BioTileEntityBlock {
 		case 0:
 			return bottomIcon;
 		case 1:
-			return topIcon;
+			if (meta == 0) {
+				return topIcon;
+			} else if (meta == 1) {
+				return topLitIcon;
+			}
 		default:
 			return sideIcon;
 		}

@@ -5,15 +5,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.world.World;
 
 import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.items.ModItems;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 	
@@ -22,12 +22,16 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 	
 	
 	public TileEntityEnerTreeFurnace() {
-		this(LanguageRegistry.instance().getStringLocalization(ModBlocks.enertreeFurnace.getUnlocalizedName() + ".name"));
+		this(ModBlocks.enertreeFurnace.getUnlocalizedName() + ".name");
 	}
 	
 	public TileEntityEnerTreeFurnace(String name) {
 		super();
 		this.func_145951_a(name);
+	}
+	
+	public boolean isInvNameLocalized() {
+		return !this.getInventoryName().endsWith(".name");
 	}
 	
 	@Override
@@ -81,58 +85,79 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 		
 	}
 	
+	
+	@Override
 	public void updateEntity() {
-		boolean flag = this.furnaceBurnTime > 0;
-		boolean flag1 = false;
+		for (int i = 0; i < 2; i++) {
+			boolean flag = this.furnaceBurnTime > 0;
+			boolean flag1 = false;
 		
-		for(int i = 0; i < 2; i++) {
+		
 			if (this.furnaceBurnTime > 0) {
 				this.furnaceBurnTime--;
 			}
-		}
-		
-		if (!this.worldObj.isRemote) {
-			if (this.furnaceBurnTime == 0 && this.canSmelt()) {
-				this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.getStackInSlot(1));
-				
-				if (this.furnaceBurnTime > 0) {
-					flag1 = true;
+			
+			if (!this.worldObj.isRemote) {
+				if (this.furnaceBurnTime == 0 && this.canSmelt()) {
+					this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.getStackInSlot(1));
 					
-					if (this.getStackInSlot(1) != null) {
-						this.getStackInSlot(1).stackSize--;
+					if (this.furnaceBurnTime > 0) {
+						flag1 = true;
 						
-						if (this.getStackInSlot(1).stackSize == 0) {
-							this.setInventorySlotContents(1, this.getStackInSlot(1).getItem().getContainerItem(this.getStackInSlot(1)));
+						if (this.getStackInSlot(1) != null) {
+							this.getStackInSlot(1).stackSize--;
+							
+							if (this.getStackInSlot(1).stackSize == 0) {
+								this.setInventorySlotContents(1, this.getStackInSlot(1).getItem().getContainerItem(this.getStackInSlot(1)));
+							}
 						}
 					}
 				}
-			}
-			
-			if (this.isBurning() && this.canSmelt()) {
-				for (int i = 0; i < 2; i++) {
+				if (this.isBurning() && this.canSmelt()) {
 					this.furnaceCookTime++;
 					if (this.furnaceCookTime == 200) {
 						this.furnaceCookTime = 0;
 						this.smeltItem();
 						flag1 = true;
 					}
+				} else {
+					this.furnaceCookTime = 0;
 				}
-			} else {
-				this.furnaceCookTime = 0;
+				if (flag != this.furnaceBurnTime > 0) {
+					if (!worldObj.isRemote)
+						changeEnertreeFurnace(this.isBurning(), worldObj, xCoord, yCoord, zCoord);
+					flag1 = true;
+				}
+				
+				
+				if (flag1) {
+					this.markDirty();
+				}
+				
+				this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 			}
 			
-			if (flag != this.furnaceBurnTime > 0) {
-				flag1 = true;
-			}
 			
-			
-			if (flag1) {
-				this.markDirty();
-			}
-			
-			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 		}
 		
+		
+		
+	}
+	
+	public static void changeEnertreeFurnace(boolean isBurning, World world, int x, int y, int z) {
+		int meta = world.getBlockMetadata(x, y, z);
+		TileEntityEnerTreeFurnace furnace = (TileEntityEnerTreeFurnace)world.getTileEntity(x, y, z);
+		if (furnace != null) {
+			switch (meta) {
+			case 0:
+				if (isBurning)
+					world.setBlockMetadataWithNotify(x, y, z, 1, 3);
+			case 1:
+				if (!isBurning)
+					world.setBlockMetadataWithNotify(x, y, z, 0, 3);
+			}
+			world.markBlockForUpdate(x, y, z);
+		}
 	}
 	
 
@@ -157,25 +182,11 @@ public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 		if(slot == 2) {
 			return false;
 		} else if (slot == 1){
-			return true;
+			return isItemFuel(stack);
 		} else {
-			return true;
+			return FurnaceRecipes.smelting().getSmeltingResult(stack) != null;
 		}
 	}
-	
-	@Override
-    public Packet getDescriptionPacket() {
-    	NBTTagCompound nbtTag = new NBTTagCompound();
-    	writeToNBT(nbtTag);
-    	return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
-    	
-    }
-    
-    @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-    	readFromNBT(pkt.func_148857_g());
-    } 
-    
     
     @Override
     public int[] getAccessibleSlotsFromSide(int side) {

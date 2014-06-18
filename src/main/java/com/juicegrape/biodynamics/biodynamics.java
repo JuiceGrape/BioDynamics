@@ -2,6 +2,7 @@ package com.juicegrape.biodynamics;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.juicegrape.biodynamics.blocks.ModBlocks;
