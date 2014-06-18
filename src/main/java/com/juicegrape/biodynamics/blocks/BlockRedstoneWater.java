@@ -78,5 +78,13 @@ public class BlockRedstoneWater extends BioLiquid {
 			 }
 		 }
 	 }
+	 
+	 public boolean canProvidePower() {
+	        return true;
+	 }
+
+	 public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side) {
+	        return 15 - world.getBlockMetadata(x, y, z);
+	    }
 
 }

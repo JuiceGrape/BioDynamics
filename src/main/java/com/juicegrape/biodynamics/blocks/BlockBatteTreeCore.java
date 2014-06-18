@@ -7,11 +7,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.juicegrape.biodynamics.blocks.common.BioTileEntityBlock;
-import com.juicegrape.biodynamics.blocks.common.energy.IEnergyReceiver;
-import com.juicegrape.biodynamics.blocks.common.energy.IEnergySupplier;
-import com.juicegrape.biodynamics.blocks.common.energy.IEnergyTransferer;
 import com.juicegrape.biodynamics.tileentity.TileEntityBatteTreeCore;
-import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
 
 public class BlockBatteTreeCore extends BioTileEntityBlock {
 
