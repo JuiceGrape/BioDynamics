@@ -24,7 +24,7 @@ public class BlockBatteTreeCore extends BioTileEntityBlock {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		TileEntityBatteTreeCore core = (TileEntityBatteTreeCore)world.getTileEntity(x, y, z);
 		if (core != null) {
-			System.out.println(core.canConnectEnergy(ForgeDirection.DOWN));
+			core.printEnergy();
 		}
 		return true;
 	}

@@ -4,8 +4,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.cofh.api.energy.EnergyStorage;
-import com.cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyHandler;
 
 /**
  * 
