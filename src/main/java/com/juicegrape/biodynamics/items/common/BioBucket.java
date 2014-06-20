@@ -9,6 +9,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemBucket;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class BioBucket extends ItemBucket {
 
 	public BioBucket(Block fluid, String name) {

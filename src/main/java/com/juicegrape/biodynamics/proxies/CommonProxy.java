@@ -13,6 +13,11 @@ import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class CommonProxy implements IGuiHandler {
 
 	public boolean isClient() {

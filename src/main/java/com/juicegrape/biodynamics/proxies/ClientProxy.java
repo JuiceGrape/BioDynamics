@@ -7,6 +7,11 @@ import com.juicegrape.biodynamics.client.guis.GuiEnerTreeFurnace;
 import com.juicegrape.biodynamics.client.guis.GuiInfo;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class ClientProxy extends CommonProxy {
 
 	@Override

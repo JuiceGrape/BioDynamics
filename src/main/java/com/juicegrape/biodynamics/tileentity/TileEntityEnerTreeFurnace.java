@@ -15,6 +15,11 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class TileEntityEnerTreeFurnace extends TileEntityFurnace {
 	
 	private static int[] topSlots = {0, 1};

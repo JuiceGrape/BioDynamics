@@ -14,7 +14,11 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class GuiEnerTreeFurnace extends GuiContainer {
 	
 	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation(GuiInfo.RESOURCELOCATIONGUIS + GuiInfo.GUI_TEXTURE_ENERTREEFURNACE);

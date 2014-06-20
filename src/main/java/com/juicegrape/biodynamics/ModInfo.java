@@ -1,5 +1,10 @@
 package com.juicegrape.biodynamics;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class ModInfo {
 
 	public static final String ID = "biodynamics";

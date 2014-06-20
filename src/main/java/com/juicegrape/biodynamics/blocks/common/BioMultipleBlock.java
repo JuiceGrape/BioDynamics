@@ -14,7 +14,11 @@ import com.juicegrape.biodynamics.blocks.BlockInfo;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
+/**
+ * Unused
+ * @author JuiceGrape
+ *
+ */
 public class BioMultipleBlock extends Block {
 	
 	IIcon[] icons;

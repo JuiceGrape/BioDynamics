@@ -12,6 +12,13 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
+
+/**
+ * 
+ * @author JuiceGrape
+ * Sort of.
+ *
+ */
 public class BucketHandler {
 	
 	public static BucketHandler INSTANCE = new BucketHandler();

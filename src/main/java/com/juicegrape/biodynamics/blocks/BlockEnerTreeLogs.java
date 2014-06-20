@@ -9,6 +9,11 @@ import com.juicegrape.biodynamics.biodynamics;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class BlockEnerTreeLogs extends BlockLog {
 	
 	private IIcon topIcon;

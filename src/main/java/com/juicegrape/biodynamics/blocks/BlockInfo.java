@@ -2,6 +2,11 @@ package com.juicegrape.biodynamics.blocks;
 
 import com.juicegrape.biodynamics.items.ItemInfo;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class BlockInfo {
 	
 	public static final String TEXTURE_LOCATION = ItemInfo.TEXTURE_LOCATION;

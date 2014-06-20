@@ -19,6 +19,11 @@ import com.juicegrape.biodynamics.misc.OreDictionaryHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class BlockRedstoneWater extends BioLiquid {
 	
 	private IIcon stillIcon;
@@ -83,8 +88,9 @@ public class BlockRedstoneWater extends BioLiquid {
 	        return true;
 	 }
 
-	 public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side) {
-	        return 15 - world.getBlockMetadata(x, y, z);
-	    }
+	 public int isProvidingStrongPower(IBlockAccess world, int x, int y, int z, int side) {
+		 int returnvalue =15 - world.getBlockMetadata(x, y, z) * 2;
+		 return returnvalue > 0 ? returnvalue : 0;
+	 }
 
 }

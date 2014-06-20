@@ -2,6 +2,11 @@ package com.juicegrape.biodynamics.client.guis;
 
 import com.juicegrape.biodynamics.items.ItemInfo;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class GuiInfo {
 	
 	public static final String RESOURCELOCATIONGUIS = ItemInfo.TEXTURE_LOCATION + ":textures/guis/";

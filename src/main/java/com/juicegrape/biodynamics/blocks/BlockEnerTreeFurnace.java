@@ -20,8 +20,13 @@ import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class BlockEnerTreeFurnace extends BioTileEntityBlock {
-	
+
 	IIcon topIcon;
 	IIcon topLitIcon;
 	IIcon sideIcon;

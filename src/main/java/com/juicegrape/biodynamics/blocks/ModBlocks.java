@@ -8,6 +8,11 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class ModBlocks {
 
 	public static Block enerTreeSapling;

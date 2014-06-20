@@ -8,6 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class ContainerEnerTreeFurnace extends ContainerFurnace {
 	
 	TileEntityEnerTreeFurnace furnace;

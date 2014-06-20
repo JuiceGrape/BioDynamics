@@ -16,8 +16,21 @@ import com.juicegrape.biodynamics.network.BucketHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
+
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class BioLiquid extends BlockFluidClassic {
 
+	/**
+	 * Set's a liquid to a block, registers a bucket for it and gives that bucket the correct fluid container.
+	 * 
+	 * @param fluid the fluid to register to this liquid block.
+	 * @param material material of the liquid.
+	 * @param name the unlocalized name of the liquid. The unlocalized name of the bucket will be this + _bucket.
+	 */
 	public BioLiquid(Fluid fluid, Material material, String name) {
 		super(fluid, material);
 		setBlockName(name);

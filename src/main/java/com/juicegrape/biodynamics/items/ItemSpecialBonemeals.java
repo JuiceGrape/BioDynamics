@@ -19,6 +19,11 @@ import com.juicegrape.biodynamics.items.common.BioItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class ItemSpecialBonemeals extends BioItem {
 	
 	

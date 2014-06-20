@@ -9,6 +9,11 @@ import com.juicegrape.biodynamics.items.ItemInfo;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class BioItem extends Item {
 	
 	public BioItem(String name) {

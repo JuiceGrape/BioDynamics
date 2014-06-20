@@ -7,6 +7,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.cofh.api.energy.EnergyStorage;
 import com.cofh.api.energy.IEnergyHandler;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 	
 	protected EnergyStorage battery = new EnergyStorage(5000);

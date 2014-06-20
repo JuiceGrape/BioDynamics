@@ -13,6 +13,11 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class BlockEnerTreeLeaves extends BlockLeaves {
 	
 	private IIcon leaves;

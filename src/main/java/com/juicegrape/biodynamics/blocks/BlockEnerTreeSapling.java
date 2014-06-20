@@ -7,6 +7,11 @@ import net.minecraftforge.common.EnumPlantType;
 
 import com.juicegrape.biodynamics.blocks.common.BioBlockSapling;
 
+/**
+ * 
+ * @author JuiceGrape
+ *
+ */
 public class BlockEnerTreeSapling extends BioBlockSapling {
 	
 	Random random;
