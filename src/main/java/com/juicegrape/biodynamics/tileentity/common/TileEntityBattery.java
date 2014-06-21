@@ -3,7 +3,6 @@ package com.juicegrape.biodynamics.tileentity.common;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 
@@ -14,11 +13,13 @@ import cofh.api.energy.IEnergyHandler;
  */
 public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 	
-	protected EnergyStorage battery = new EnergyStorage(5000);
+	protected EnergyStorage battery;
+	
+	
 	
 	public TileEntityBattery(int stored, int maxIn, int maxOut) {
 		super();
-	//	battery = new EnergyStorage(stored, maxIn, maxOut);
+		battery = new EnergyStorage(stored, maxIn, maxOut);
 	}
 	
 	@Override
@@ -33,6 +34,24 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 		super.writeToNBT(nbt);
 		battery.writeToNBT(nbt);
 	}
+	
+	@Override
+	public void updateEntity() {
+		if (!worldObj.isRemote) {
+			for (ForgeDirection dir : getOutputDirections()) {
+				TileEntity ent = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+				if (ent != null && ent instanceof cofh.api.energy.IEnergyHandler) {
+					cofh.api.energy.IEnergyHandler handler = (cofh.api.energy.IEnergyHandler)ent;
+					int handleEnergy = getCorrectTransferValue(handler.receiveEnergy(dir.getOpposite(), battery.getMaxExtract(), true), this.extractEnergy(dir, battery.getMaxExtract(), true));
+					//System.out.println("HandleEnergy = " + handleEnergy);
+					if (handleEnergy != 0){
+						handler.receiveEnergy(dir.getOpposite(), handleEnergy, false);
+						this.extractEnergy(dir, handleEnergy, false);
+					}
+				}
+			}
+		}
+	}
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
@@ -41,11 +60,22 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		return battery.receiveEnergy(maxReceive, simulate);
+		for (ForgeDirection dir : getInputDirections()) {
+			if (dir == from) {
+				return battery.receiveEnergy(maxReceive, simulate);
+			}
+		}
+		return 0;
+		
 	}
 
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+		for (ForgeDirection dir : getInputDirections()) {
+			if (dir == from) {
+				return battery.extractEnergy(maxExtract, simulate);
+			}
+		}
 		return battery.extractEnergy(maxExtract, simulate);
 	}
 
@@ -57,6 +87,18 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from) {
 		return battery.getMaxEnergyStored();
+	}
+	
+	protected int getCorrectTransferValue(int transfer, int extract) {
+		return Math.min(transfer, extract);
+	}
+	
+	protected ForgeDirection[] getInputDirections() {
+		return ForgeDirection.VALID_DIRECTIONS;
+	}
+	
+	protected ForgeDirection[] getOutputDirections() {
+		return ForgeDirection.VALID_DIRECTIONS;
 	}
 	
 	

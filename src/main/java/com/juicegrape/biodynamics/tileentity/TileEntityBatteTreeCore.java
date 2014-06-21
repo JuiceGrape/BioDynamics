@@ -1,5 +1,7 @@
 package com.juicegrape.biodynamics.tileentity;
 
+import com.juicegrape.biodynamics.tileentity.common.TileEntityBattery;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -14,12 +16,14 @@ import cofh.api.energy.IEnergyHandler;
  * @author JuiceGrape
  *
  */
-public class TileEntityBatteTreeCore extends TileEntity implements IEnergyHandler {
+public class TileEntityBatteTreeCore extends TileEntityBattery {
 	
-	EnergyStorage battery = new EnergyStorage(5000);
+	private ForgeDirection[] outputDirs = {ForgeDirection.DOWN};
+	private ForgeDirection[] inputDirs = {ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.EAST, ForgeDirection.WEST};
+	
 
 	public TileEntityBatteTreeCore() {
-		super();
+		super(50000, 200, 200);
 	}
 	
 	public void writePower() {
@@ -45,28 +49,9 @@ public class TileEntityBatteTreeCore extends TileEntity implements IEnergyHandle
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
-		return true;
+		return from != ForgeDirection.UP;
 	}
 
-	@Override
-	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		return battery.receiveEnergy(maxReceive, simulate);
-	}
-
-	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		return battery.extractEnergy(maxExtract, simulate);
-	}
-
-	@Override
-	public int getEnergyStored(ForgeDirection from) {
-		return battery.getEnergyStored();
-	}
-
-	@Override
-	public int getMaxEnergyStored(ForgeDirection from) {
-		return battery.getMaxEnergyStored();
-	}
 	
 	@Override
     public Packet getDescriptionPacket() {
@@ -80,6 +65,16 @@ public class TileEntityBatteTreeCore extends TileEntity implements IEnergyHandle
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
     	readFromNBT(pkt.func_148857_g());
     }
+    
+    @Override
+    protected ForgeDirection[] getInputDirections() {
+		return inputDirs;
+	}
+	
+    @Override
+	protected ForgeDirection[] getOutputDirections() {
+		return outputDirs;
+	}
 	
 	
 
