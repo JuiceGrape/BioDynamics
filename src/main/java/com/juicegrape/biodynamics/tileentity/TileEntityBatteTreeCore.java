@@ -26,10 +26,6 @@ public class TileEntityBatteTreeCore extends TileEntityBattery {
 		super(50000, 200, 200);
 	}
 	
-	public void writePower() {
-		System.out.println(this.getEnergyStored(ForgeDirection.UNKNOWN));
-	}
-	
 	public void printEnergy() {
 		System.out.println(this.getEnergyStored(ForgeDirection.UNKNOWN));
 	}

@@ -23,6 +23,10 @@ public class BlockInfo {
 	
 	public static final String BATTETREECORE = "battetree_core";
 	
+	public static final String ENERGETICSOIL = "energy_soil";
+	
+	public static final String SOLARFLOWER = "solar_flower";
+	
 	
 	
 	

@@ -6,6 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.juicegrape.biodynamics.items.ItemBlockEnergySoil;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -23,6 +26,8 @@ public class ModBlocks {
 	public static Block enertreePlanks;
 	public static Block enertreeFurnace;
 	public static Block battetreeCore;
+	public static Block energysoil;
+	public static Block solarflower;
 	
 	
 	
@@ -54,6 +59,12 @@ public class ModBlocks {
 		
 		battetreeCore = new BlockBatteTreeCore(BlockInfo.BATTETREECORE);
 		GameRegistry.registerBlock(battetreeCore, BlockInfo.BATTETREECORE);
+		
+		energysoil = new BlockEnergySoil(BlockInfo.ENERGETICSOIL);
+		GameRegistry.registerBlock(energysoil, ItemBlockEnergySoil.class, BlockInfo.ENERGETICSOIL);
+		
+		solarflower = new BlockSolarFlower(BlockInfo.SOLARFLOWER);
+		GameRegistry.registerBlock(solarflower, BlockInfo.SOLARFLOWER);
 		
 		addOreDict();
 		

@@ -3,6 +3,7 @@ package com.juicegrape.biodynamics.recipes;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -21,10 +22,12 @@ public class CommonRecipes {
 	
 	public static void initCommonRecipes() {
 		
+		//Redstone Bonemeal
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.enertreePlanks, 4), new Object[] {
 			new ItemStack(ModBlocks.enertreeLogs)
 		});
 		
+		//Gold Bonemeal
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.specialBonemeal, 2, 0), new Object[] {
 			new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.redstone)
 		});
@@ -37,6 +40,15 @@ public class CommonRecipes {
 			"aaa",
 			"aaa",
 			Character.valueOf('a'), new ItemStack(ModItems.craftingItem, 1, 5)
+		});
+		
+		//Redstone soil
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.energysoil, 1, 0), new Object[] {
+			"rdr",
+			"drd",
+			"rdr",
+			Character.valueOf('r'), new ItemStack(ModItems.specialBonemeal, 1, 0),
+			Character.valueOf('d'), new ItemStack(Blocks.dirt)
 		});
 		
 	}

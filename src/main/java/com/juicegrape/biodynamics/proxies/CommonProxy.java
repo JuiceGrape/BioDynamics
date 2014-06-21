@@ -4,11 +4,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 import com.juicegrape.biodynamics.blocks.BlockInfo;
-import com.juicegrape.biodynamics.client.guis.GuiEnerTreeFurnace;
 import com.juicegrape.biodynamics.client.guis.GuiInfo;
 import com.juicegrape.biodynamics.tileentity.ContainerEnerTreeFurnace;
 import com.juicegrape.biodynamics.tileentity.TileEntityBatteTreeCore;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
+import com.juicegrape.biodynamics.tileentity.TileEntitySoil;
+import com.juicegrape.biodynamics.tileentity.generators.TileEntitySolarFlower;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -27,6 +28,8 @@ public class CommonProxy implements IGuiHandler {
 	public void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityEnerTreeFurnace.class, BlockInfo.ENERTREEFURNACE);
 		GameRegistry.registerTileEntity(TileEntityBatteTreeCore.class, BlockInfo.BATTETREECORE);
+		GameRegistry.registerTileEntity(TileEntitySoil.class, BlockInfo.ENERGETICSOIL);
+		GameRegistry.registerTileEntity(TileEntitySolarFlower.class, BlockInfo.SOLARFLOWER);
 	}
 
 	@Override

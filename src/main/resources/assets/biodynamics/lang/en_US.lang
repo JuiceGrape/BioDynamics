@@ -1,15 +1,46 @@
-Blocks=
+BLOCKS:
+
+General:
+tile.redstonewater.name=Redstone Water
+tile.battetree_core.name=Battetree Core
+
+Enertree:
 tile.enertree_sapling.name=Enertree Sapling
 tile.enertree_leaves.name=Enertree Leaves
-tile.enertree_logs.name=Enertree Logs
+tile.enertree_logs.name=Enertree Wood
 tile.enertree_planks.name=Enertree Planks
 tile.enertree_furnace.name=Enertree Furnace
-tile.redstonewater.name=Redstone Water
 
-Items=
+Soil:
+tile.energy_soil0.name=Redstone Soil
+tile.energy_soil1.name=tier2 soil
+tile.energy_soil2.name=tier3 soil
+
+Generators:
+tile.solar_flower.name:SolarFlower
+
+-----------------------------------------------
+ITEMS:
+
+General:
 item.redstonewater_bucket.name=Redstone Water Bucket
+
+Bonemeals:
 item.specialbonemeal0.name=Redstone Bonemeal
 item.specialbonemeal1.name=Gold Bonemeal
 
-Misc=
+Minerals:
+item.pinkdiamond.name=Pink Diamond
+item.organic_ingot.name=Organic Ingot
+item.organic_nugget.name=Organic Nugget
+
+Dusts:
+item.organic_dust.name=Organic Dust
+item.iron_dust.name=Iron Dust
+item.gold_dust.name=Gold Dust
+
+
+------------------------------------------------------------
+
+Misc:
 itemGroup.biodynamics=BioDynamics

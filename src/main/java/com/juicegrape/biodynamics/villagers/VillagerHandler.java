@@ -3,6 +3,8 @@ package com.juicegrape.biodynamics.villagers;
 import java.util.Random;
 
 import com.juicegrape.biodynamics.biodynamics;
+import com.juicegrape.biodynamics.blocks.ModBlocks;
+import com.juicegrape.biodynamics.items.ModItems;
 import com.juicegrape.biodynamics.recipes.CommonRecipes;
 
 import net.minecraft.entity.passive.EntityVillager;
@@ -38,7 +40,8 @@ public class VillagerHandler implements IVillageTradeHandler {
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
 		
 		if (villager.getProfession() == ID) {
-			recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1), new ItemStack(Items.diamond, 1)));
+			recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 9 + random.nextInt(4)), new ItemStack(ModBlocks.solarflower, 1)));
+			recipeList.add(new MerchantRecipe(new ItemStack(Items.diamond, 1 + random.nextInt(4)), new ItemStack(ModItems.craftingItem, 1, 0)));
 		}
 		
 	}
