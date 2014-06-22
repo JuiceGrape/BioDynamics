@@ -1,8 +1,8 @@
 package com.juicegrape.biodynamics.misc;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
 
 /**
  * 
