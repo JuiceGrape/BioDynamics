@@ -23,6 +23,7 @@ public class BlockEnerTreeLogs extends BlockLog {
 		super();
 		this.setBlockName(BlockInfo.ENERTREELOGS);
 		this.setCreativeTab(biodynamics.bioTab);
+		this.setStepSound(soundTypeWood);
 	}
 	
 	@Override

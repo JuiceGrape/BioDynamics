@@ -7,7 +7,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.juicegrape.biodynamics.items.ItemBlockEnergySoil;
+import com.juicegrape.biodynamics.items.itemBlocks.ItemBlockEnergySoil;
+import com.juicegrape.biodynamics.items.itemBlocks.ItemBlockMinerals;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -28,6 +29,8 @@ public class ModBlocks {
 	public static Block battetreeCore;
 	public static Block energysoil;
 	public static Block solarflower;
+	public static Block mineralBlocks;
+	public static Block cableblock;
 	
 	
 	
@@ -66,16 +69,22 @@ public class ModBlocks {
 		solarflower = new BlockSolarFlower(BlockInfo.SOLARFLOWER);
 		GameRegistry.registerBlock(solarflower, BlockInfo.SOLARFLOWER);
 		
+		mineralBlocks = new BlockCompressedMinerals(BlockInfo.MINERALBLOCK);
+		GameRegistry.registerBlock(mineralBlocks, ItemBlockMinerals.class, BlockInfo.MINERALBLOCK);
+		
+		cableblock = new BlockEnergyCable(BlockInfo.CABLE);
+		GameRegistry.registerBlock(cableblock, BlockInfo.CABLE);
+		
 		addOreDict();
 		
 
 	}
 	
 	public static void addOreDict() {
-		OreDictionary.registerOre(OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(Blocks.sapling))), enerTreeSapling);
-		OreDictionary.registerOre(OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(Blocks.leaves))), enertreeLeaves);
-		OreDictionary.registerOre(OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(Blocks.log))), enertreeLogs);
-		OreDictionary.registerOre(OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(Blocks.planks))), enertreePlanks);
+		OreDictionary.registerOre("treeSapling", enerTreeSapling);
+		OreDictionary.registerOre("treeLeaves", enertreeLeaves);
+		OreDictionary.registerOre("logWood", enertreeLogs);
+		OreDictionary.registerOre("plankWood", enertreePlanks);
 	}
 
 }

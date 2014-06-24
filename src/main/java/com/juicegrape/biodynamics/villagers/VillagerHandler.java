@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.juicegrape.biodynamics.biodynamics;
 import com.juicegrape.biodynamics.blocks.ModBlocks;
+import com.juicegrape.biodynamics.entities.EntityInfo;
 import com.juicegrape.biodynamics.items.ModItems;
 import com.juicegrape.biodynamics.recipes.CommonRecipes;
 
@@ -48,7 +49,7 @@ public class VillagerHandler implements IVillageTradeHandler {
 	
 	
 	public static void init() {
-		specialInit(new VillagerHandler(VILLAGER_ID, "textures/entity/villager/villager.png"), new HutCreationHandler(), "BioDynamics:HutStructure");
+		specialInit(new VillagerHandler(VILLAGER_ID, EntityInfo.TEXTURE_LOCATION + "bio_villager.png"), new HutCreationHandler(), "BioDynamics:HutStructure");
 	}
 	
 	public static void specialInit(VillagerHandler handler, IVillageCreationHandler creationHandler, String strucname) {

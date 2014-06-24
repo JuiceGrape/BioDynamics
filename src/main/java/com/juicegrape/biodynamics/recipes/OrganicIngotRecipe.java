@@ -59,6 +59,7 @@ public class OrganicIngotRecipe {
 	
 	public static void init() {
 		String name = "dustIron";
+		String name2 = "dustGold";
 		Iterator itr = materialMap.entrySet().iterator();
 		while (itr.hasNext()) {
 			Entry<ItemStack, Integer> entry = (Entry<ItemStack, Integer>)itr.next();
@@ -96,9 +97,14 @@ public class OrganicIngotRecipe {
 			
 		}
 		
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.craftingItem, 1, 2), name, oreDictOrganic1));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.craftingItem, 2, 2), name, oreDictOrganic2));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.craftingItem, 3, 2), name, oreDictOrganic3));
+		//Iron dust to organic iron dust
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.craftingItem, 1, 3), name, oreDictOrganic1));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.craftingItem, 2, 3), name, oreDictOrganic2));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.craftingItem, 3, 3), name, oreDictOrganic3));
+		
+		//Gold dust to organic gold dust, it creates 1 with a tier 2 organic, and 2 with a tier 3 organic
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.craftingItem, 1, 7), name2, oreDictOrganic2));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.craftingItem, 2, 7), name2, oreDictOrganic3));
 		
 		
 	}

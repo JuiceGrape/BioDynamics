@@ -32,15 +32,62 @@ public class CommonRecipes {
 			new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.redstone)
 		});
 		
-		//Organics
-		GameRegistry.addSmelting(new ItemStack(ModItems.craftingItem, 1, 2), new ItemStack(ModItems.craftingItem, 1, 1), 200);
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 5), new ItemStack (ModItems.craftingItem, 1, 1));
+		//Organics iron
+		//dust to ingot
+		GameRegistry.addSmelting(new ItemStack(ModItems.craftingItem, 1, 3), new ItemStack(ModItems.craftingItem, 1, 1), 200);
+		//ingots to nugget
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 3), new ItemStack (ModItems.craftingItem, 1, 1));
+		//nugget to ingots
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.craftingItem, 1, 1), new Object[] {
+			"aaa",
+			"aaa",
+			"aaa",
+			Character.valueOf('a'), new ItemStack(ModItems.craftingItem, 1, 2)
+		});
+		//block to ingots
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 1), new ItemStack (ModBlocks.mineralBlocks, 1, 1));
+		//ingots to block
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.mineralBlocks, 1, 1), new Object[] {
+			"aaa",
+			"aaa",
+			"aaa",
+			Character.valueOf('a'), new ItemStack(ModItems.craftingItem, 1, 1)
+		});
+		
+		//Organics gold
+		//dust to ingot
+		GameRegistry.addSmelting(new ItemStack(ModItems.craftingItem, 1, 7), new ItemStack(ModItems.craftingItem, 1, 5), 200);
+		//ingot to nuggets
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 7), new ItemStack (ModItems.craftingItem, 1, 5));
+		//nugget to ingots
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.craftingItem, 1, 5), new Object[] {
+			"aaa",
+			"aaa",
+			"aaa",
+			Character.valueOf('a'), new ItemStack(ModItems.craftingItem, 1, 6)
+		});
+		//block to ingots
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 5), new ItemStack (ModBlocks.mineralBlocks, 1, 2));
+		//ingots to block
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.mineralBlocks, 1, 2), new Object[] {
 			"aaa",
 			"aaa",
 			"aaa",
 			Character.valueOf('a'), new ItemStack(ModItems.craftingItem, 1, 5)
 		});
+		
+		//Pink diamond
+		//block to gems
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 0), new ItemStack (ModBlocks.mineralBlocks, 1, 0));
+		//gems to block
+		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.mineralBlocks, 1, 0), new Object[] {
+			"aaa",
+			"aaa",
+			"aaa",
+			Character.valueOf('a'), new ItemStack(ModItems.craftingItem, 1, 0)
+		});
+		
+		
 		
 		//Redstone soil
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.energysoil, 1, 0), new Object[] {

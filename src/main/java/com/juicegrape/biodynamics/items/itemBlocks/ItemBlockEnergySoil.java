@@ -1,4 +1,4 @@
-package com.juicegrape.biodynamics.items;
+package com.juicegrape.biodynamics.items.itemBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;

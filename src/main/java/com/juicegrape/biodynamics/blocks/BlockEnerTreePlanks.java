@@ -13,6 +13,7 @@ public class BlockEnerTreePlanks extends BioBlock {
 
 	protected BlockEnerTreePlanks(String name) {
 		super(Material.wood, name);
+		this.setStepSound(soundTypeWood);
 	}
 
 }

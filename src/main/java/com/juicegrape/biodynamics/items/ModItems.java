@@ -36,7 +36,17 @@ public class ModItems {
 	}
 	
 	public static void initOreDict() {
-		OreDictionary.registerOre("dustIron", new ItemStack(craftingItem, 1, 3));
+		OreDictionary.registerOre("dustIron", new ItemStack(craftingItem, 1, 4));
+		OreDictionary.registerOre("dustGold", new ItemStack(craftingItem, 1, 8));
+		
+		OreDictionary.registerOre("dustOrganicIron", new ItemStack(craftingItem, 1, 3));
+		OreDictionary.registerOre("dustOrganicGold", new ItemStack(craftingItem, 1, 7));
+		
+		OreDictionary.registerOre("ingotOrganicIron", new ItemStack(craftingItem, 1, 1));
+		OreDictionary.registerOre("ingotOrganicGold", new ItemStack(craftingItem, 1, 5));
+		
+		OreDictionary.registerOre("nuggetOrganicIron", new ItemStack(craftingItem, 1, 2));
+		OreDictionary.registerOre("nuggetOrganicGold", new ItemStack(craftingItem, 1, 6));
 	}
 
 }

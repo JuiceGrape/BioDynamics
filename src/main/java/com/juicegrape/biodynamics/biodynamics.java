@@ -73,6 +73,8 @@ public class biodynamics {
 		VillagerHandler.init();
 		
 		ModItems.initOreDict();
+		
+		proxy.initRenderers();
 
 	}
 

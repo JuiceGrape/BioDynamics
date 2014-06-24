@@ -4,7 +4,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import com.juicegrape.biodynamics.blocks.common.BioTileEntityBlock;
 import com.juicegrape.biodynamics.tileentity.TileEntityBatteTreeCore;
@@ -13,6 +12,7 @@ public class BlockBatteTreeCore extends BioTileEntityBlock {
 
 	protected BlockBatteTreeCore(String name) {
 		super(Material.wood, name);
+		this.setStepSound(soundTypeWood);
 	}
 	
 	@Override

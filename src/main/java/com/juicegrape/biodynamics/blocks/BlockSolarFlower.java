@@ -12,6 +12,7 @@ public class BlockSolarFlower extends BioGeneratorBlock {
 
 	protected BlockSolarFlower(String name) {
 		super(Material.plants, name);
+		this.setStepSound(soundTypeGrass);
 	}
 	
 	@Override

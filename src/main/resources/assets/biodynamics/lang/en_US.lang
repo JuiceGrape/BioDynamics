@@ -17,7 +17,7 @@ tile.energy_soil1.name=tier2 soil
 tile.energy_soil2.name=tier3 soil
 
 Generators:
-tile.solar_flower.name:SolarFlower
+tile.solar_flower.name=SolarFlower
 
 -----------------------------------------------
 ITEMS:
@@ -30,12 +30,15 @@ item.specialbonemeal0.name=Redstone Bonemeal
 item.specialbonemeal1.name=Gold Bonemeal
 
 Minerals:
-item.pinkdiamond.name=Pink Diamond
-item.organic_ingot.name=Organic Ingot
-item.organic_nugget.name=Organic Nugget
+item.pink_diamond.name=Pink Diamond
+item.organic_iron_ingot.name=Organic Iron Ingot
+item.organic_iron_nugget.name=Organic Iron Nugget
+item.organic_gold_ingot.name=Organic Gold Ingot
+item.organic_gold_nugget.name=Organic Gold Nugget
 
 Dusts:
-item.organic_dust.name=Organic Dust
+item.organic_iron_dust.name=Organic Iron Dust
+item.organic_gold_dust.name=Organic Gold Dust
 item.iron_dust.name=Iron Dust
 item.gold_dust.name=Gold Dust
 

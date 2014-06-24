@@ -36,6 +36,7 @@ public class BlockEnerTreeFurnace extends BioTileEntityBlock {
 
 	protected BlockEnerTreeFurnace(String name) {
 		super(Material.wood, name);
+		this.setStepSound(soundTypeWood);
 	}
 	
 	@Override
