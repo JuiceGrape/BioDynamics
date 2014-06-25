@@ -15,11 +15,22 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 	
 	protected EnergyStorage battery;
 	
+	protected int loss;
+	
 	
 	
 	public TileEntityBattery(int stored, int maxIn, int maxOut) {
 		super();
 		battery = new EnergyStorage(stored, maxIn, maxOut);
+		loss = 0;
+	}
+	
+	public void setLoss(int loss) {
+		this.loss = loss;
+	}
+	
+	public int getLoss() {
+		return loss;
 	}
 	
 	@Override
@@ -46,7 +57,7 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 					//System.out.println("HandleEnergy = " + handleEnergy);
 					if (handleEnergy != 0){
 						handler.receiveEnergy(dir.getOpposite(), handleEnergy, false);
-						this.extractEnergy(dir, handleEnergy, false);
+						this.extractEnergy(dir, handleEnergy * (loss / 100)  , false);
 					}
 				}
 			}

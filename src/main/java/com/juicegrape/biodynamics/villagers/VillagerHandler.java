@@ -49,7 +49,7 @@ public class VillagerHandler implements IVillageTradeHandler {
 	
 	
 	public static void init() {
-		specialInit(new VillagerHandler(VILLAGER_ID, EntityInfo.TEXTURE_LOCATION + "bio_villager.png"), new HutCreationHandler(), "BioDynamics:HutStructure");
+		specialInit(new VillagerHandler(VILLAGER_ID, EntityInfo.TEXTURE_LOCATION + "finn_villager.png"), new HutCreationHandler(), "BioDynamics:HutStructure");
 	}
 	
 	public static void specialInit(VillagerHandler handler, IVillageCreationHandler creationHandler, String strucname) {

@@ -1,26 +1,26 @@
 package com.juicegrape.biodynamics.client.render;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.techne.TechneModel;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
+import cofh.api.energy.IEnergyConnection;
+
 public class RenderCable extends TileEntitySpecialRenderer {
 	
-private static final ResourceLocation texture = new ResourceLocation("biodynamics:textures/models/CableCore.png");
+private static final ResourceLocation texture = new ResourceLocation("biodynamics:textures/models/cable.png");
 	
-	public static final ResourceLocation baseLoc = new ResourceLocation("biodynamics:models/CableCore.tcn");
-	public static final ResourceLocation extensionLoc = new ResourceLocation("biodynamics:models/CableSide.tcn");
+	public static final ResourceLocation modelLoc = new ResourceLocation("biodynamics:models/cable.tcn");
 	
-	public static TechneModel cableBase;
-	public static TechneModel cableExtension;
+	public final TechneModel cable;
 	
 	public RenderCable() {
-		cableBase  = new TechneModel(baseLoc);
-		cableExtension = new TechneModel(extensionLoc);
+		cable = new TechneModel(modelLoc);
 	}
 	
 	
@@ -33,16 +33,61 @@ private static final ResourceLocation texture = new ResourceLocation("biodynamic
 		
 		GL11.glPushMatrix();
 		
-		 GL11.glTranslatef((float) x, (float) y, (float) z);
+		 GL11.glTranslatef((float) x + 0.5F, (float) y, (float) z + 0.5F);
 		 
 		 GL11.glPushMatrix();
+		 
+		 float scaler = 1F / 16F;
+		 
+		 GL11.glScalef(scaler, scaler, scaler);
+		 GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+
 		
-		cableBase.render((Entity) null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+		renderParts(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord);
+				
+		cable.renderPart("Core");
 		
 		GL11.glPopMatrix();
 		
 		GL11.glPopMatrix();
 
+	}
+	
+	private void renderParts(World world, int x, int y, int z) {
+		if (world == null) {
+			float scaler = 2.0F;
+			GL11.glScalef(scaler, scaler, scaler);
+			GL11.glTranslatef(0.0F, scaler * 2, 0.0F);
+			return;
+		}
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity te = world.getTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+			if (te != null && te instanceof IEnergyConnection) {
+				IEnergyConnection tei = (IEnergyConnection)te;
+				if (tei.canConnectEnergy(dir.getOpposite())) {
+					cable.renderPart(getNameFromDirection(dir));
+				}
+			}
+		}
+	}
+	
+	private String getNameFromDirection(ForgeDirection dir) {
+		switch (dir) {
+		case UP:
+			return "Up";
+		case DOWN:
+			return "Down";
+		case SOUTH:
+			return "Back";
+		case WEST:
+			return "Right";
+		case EAST:
+			return "Left";
+		case NORTH:
+			return "Front";
+		default:
+			return "ERROR";
+		}
 	}
 
 }

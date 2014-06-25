@@ -4,8 +4,8 @@ import com.juicegrape.biodynamics.tileentity.common.TileEntityBattery;
 
 public class TileEntityCable extends TileEntityBattery  {
 
-	public TileEntityCable() {
-		super(200, 100, 100);
+	public TileEntityCable(int tier) {
+		super(800*tier*tier, 100*tier*tier, 100*tier*tier);
 	}
 
 }

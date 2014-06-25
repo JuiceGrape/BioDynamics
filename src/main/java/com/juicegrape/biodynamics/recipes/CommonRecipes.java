@@ -98,6 +98,26 @@ public class CommonRecipes {
 			Character.valueOf('d'), new ItemStack(Blocks.dirt)
 		});
 		
+		//Enertree furnace recipe
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.enertreeFurnace), new Object[] {
+			"l l",
+			"lrl",
+			"www",
+			Character.valueOf('l'), new ItemStack(ModBlocks.enertreeLogs),
+			Character.valueOf('r'), new ItemStack(Blocks.redstone_block),
+			Character.valueOf('w'), new ItemStack(ModBlocks.enertreePlanks)
+		});
+		
+		//Tier 1 cable
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.cableblock, 4, 0), new Object[] {
+			"iri",
+			"www",
+			"iri",
+			Character.valueOf('i'), new ItemStack(ModItems.craftingItem, 1, 1),
+			Character.valueOf('r'), new ItemStack(Items.redstone),
+			Character.valueOf('w'), new ItemStack(ModBlocks.enertreePlanks)
+		});
+		
 	}
 
 }
