@@ -55,7 +55,6 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 					cofh.api.energy.IEnergyHandler handler = (cofh.api.energy.IEnergyHandler)ent;
 					int handleEnergy = getCorrectTransferValue(handler.receiveEnergy(dir.getOpposite(), battery.getMaxExtract(), true), this.extractEnergy(dir, battery.getMaxExtract(), true));
 					if (handleEnergy != 0){
-						System.out.println(handleEnergy);
 						handler.receiveEnergy(dir.getOpposite(), handleEnergy, false);
 						this.extractEnergy(dir, handleEnergy , false);
 					}
@@ -82,11 +81,6 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		for (ForgeDirection dir : getInputDirections()) {
-			if (dir == from) {
-				return battery.extractEnergy(maxExtract, simulate);
-			}
-		}
 		return battery.extractEnergy(maxExtract, simulate);
 	}
 
