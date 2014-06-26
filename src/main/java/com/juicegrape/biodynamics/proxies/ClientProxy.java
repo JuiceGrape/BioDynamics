@@ -35,7 +35,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void initRenderers() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new RenderCable());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.cableblock), new ItemTERenderer(new TileEntityCable(1)));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.cableblock), new ItemTERenderer(new TileEntityCable()));
 	}
 	
 	@Override

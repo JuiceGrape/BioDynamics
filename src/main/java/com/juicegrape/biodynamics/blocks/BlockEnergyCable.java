@@ -1,12 +1,14 @@
 package com.juicegrape.biodynamics.blocks;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.juicegrape.biodynamics.blocks.common.BioTileEntityBlock;
 import com.juicegrape.biodynamics.tileentity.TileEntityCable;
+import com.juicegrape.biodynamics.tileentity.TileEntitySoil;
 
 public class BlockEnergyCable extends BioTileEntityBlock {
 
@@ -20,7 +22,7 @@ public class BlockEnergyCable extends BioTileEntityBlock {
 	
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityCable(meta + 1);
+		return new TileEntityCable();
 	}
 	
 	@Override
@@ -36,6 +38,14 @@ public class BlockEnergyCable extends BioTileEntityBlock {
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int x, int y, int z, int side) {
 	   return false;
+	}
+	
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		TileEntityCable core = (TileEntityCable)world.getTileEntity(x, y, z);
+		if (!world.isRemote && core != null) {
+			core.printEnergy();
+		}
+		return true;
 	}
 
 }

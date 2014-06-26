@@ -54,10 +54,10 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 				if (ent != null && ent instanceof cofh.api.energy.IEnergyHandler) {
 					cofh.api.energy.IEnergyHandler handler = (cofh.api.energy.IEnergyHandler)ent;
 					int handleEnergy = getCorrectTransferValue(handler.receiveEnergy(dir.getOpposite(), battery.getMaxExtract(), true), this.extractEnergy(dir, battery.getMaxExtract(), true));
-					//System.out.println("HandleEnergy = " + handleEnergy);
 					if (handleEnergy != 0){
+						System.out.println(handleEnergy);
 						handler.receiveEnergy(dir.getOpposite(), handleEnergy, false);
-						this.extractEnergy(dir, handleEnergy * (loss / 100)  , false);
+						this.extractEnergy(dir, handleEnergy , false);
 					}
 				}
 			}
@@ -110,6 +110,11 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 	
 	protected ForgeDirection[] getOutputDirections() {
 		return ForgeDirection.VALID_DIRECTIONS;
+	}
+	
+	public void printEnergy() {
+		System.out.println("energyStored " + this.getEnergyStored(ForgeDirection.UNKNOWN));
+		System.out.println("maxEnergyStored " + this.getMaxEnergyStored(ForgeDirection.UNKNOWN));
 	}
 	
 	

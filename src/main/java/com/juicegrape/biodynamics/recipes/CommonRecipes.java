@@ -36,7 +36,7 @@ public class CommonRecipes {
 		//dust to ingot
 		GameRegistry.addSmelting(new ItemStack(ModItems.craftingItem, 1, 3), new ItemStack(ModItems.craftingItem, 1, 1), 200);
 		//ingots to nugget
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 3), new ItemStack (ModItems.craftingItem, 1, 1));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 2), new ItemStack (ModItems.craftingItem, 1, 1));
 		//nugget to ingots
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.craftingItem, 1, 1), new Object[] {
 			"aaa",
@@ -58,7 +58,7 @@ public class CommonRecipes {
 		//dust to ingot
 		GameRegistry.addSmelting(new ItemStack(ModItems.craftingItem, 1, 7), new ItemStack(ModItems.craftingItem, 1, 5), 200);
 		//ingot to nuggets
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 7), new ItemStack (ModItems.craftingItem, 1, 5));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.craftingItem, 9, 6), new ItemStack (ModItems.craftingItem, 1, 5));
 		//nugget to ingots
 		GameRegistry.addShapedRecipe(new ItemStack(ModItems.craftingItem, 1, 5), new Object[] {
 			"aaa",
