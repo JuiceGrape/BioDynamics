@@ -14,6 +14,7 @@ import com.juicegrape.biodynamics.tileentity.TileEntityCable;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 /**
  * 
@@ -35,7 +36,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void initRenderers() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new RenderCable());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.cableblock), new ItemTERenderer(new TileEntityCable()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.cableblock), new ItemTERenderer(new TileEntityCable(0)));
 	}
 	
 	@Override
@@ -46,6 +47,11 @@ public class ClientProxy extends CommonProxy {
 		default:
 			return null;
 		}
+	}
+	
+	@Override
+	public int addArmor(String armor) {
+		return RenderingRegistry.addNewArmourRendererPrefix(armor);
 	}
 	
 

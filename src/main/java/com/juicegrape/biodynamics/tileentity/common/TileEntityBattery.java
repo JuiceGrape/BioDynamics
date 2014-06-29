@@ -111,6 +111,10 @@ public class TileEntityBattery extends TileEntity implements IEnergyHandler {
 		System.out.println("maxEnergyStored " + this.getMaxEnergyStored(ForgeDirection.UNKNOWN));
 	}
 	
+	public void setMaxTransfer(int transfer) {
+		battery.setMaxExtract(transfer);
+	}
+	
 	
 	
 /*	public TileEntityBattery(int maxEnergy) {

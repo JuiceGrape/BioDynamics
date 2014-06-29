@@ -25,11 +25,16 @@ public class ItemInfo {
 /*6*/		"organic_gold_nugget",
 /*7*/		"organic_gold_dust",
 /*8*/		"gold_dust"
-
-
-
-
 	};
 	public static final String CRAFTINGITEM = "craftingitem";
+	
+	public static final String[] ORGANICIRONARMOUR = {"organic_iron_helmet", "organic_iron_body", "organic_iron_legs", "organic_iron_boots"};
+	public static final String ORGANICIRONARMOURRENDER = "organic_iron_armour";
+	
+	public static final String[] ORGANICGOLDARMOUR = {"organic_gold_helmet", "organic_gold_body", "organic_gold_legs", "organic_gold_boots"};
+	public static final String ORGANICGOLDARMOURRENDER = "organic_gold_armour";
+	
+	public static final String[] PINKDIAMONDARMOUR = {"pink_diamond_helmet", "pink_diamond_body", "pink_diamond_legs", "pink_diamond_boots"};
+	public static final String PINKDIAMONDARMOURRENDER = "pink_diamond_armour";
 
 }
