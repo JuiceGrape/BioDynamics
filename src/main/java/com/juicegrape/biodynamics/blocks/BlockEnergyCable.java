@@ -42,7 +42,7 @@ public class BlockEnergyCable extends BioTileEntityBlock {
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		
-		((TileEntityBattery)world.getTileEntity(x, y, z)).printEnergy();
+	//	((TileEntityBattery)world.getTileEntity(x, y, z)).printEnergy();
 		
 		
 		
