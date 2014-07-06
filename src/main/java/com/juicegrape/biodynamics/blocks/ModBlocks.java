@@ -1,12 +1,12 @@
 package com.juicegrape.biodynamics.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.juicegrape.biodynamics.blocks.generators.BlockBurningFlower;
+import com.juicegrape.biodynamics.blocks.generators.BlockSolarFlower;
 import com.juicegrape.biodynamics.items.itemBlocks.ItemBlockEnergySoil;
 import com.juicegrape.biodynamics.items.itemBlocks.ItemBlockMinerals;
 
@@ -29,6 +29,7 @@ public class ModBlocks {
 	public static Block battetreeCore;
 	public static Block energysoil;
 	public static Block solarflower;
+	public static Block burningflower;
 	public static Block mineralBlocks;
 	public static Block cableblock;
 	
@@ -68,6 +69,9 @@ public class ModBlocks {
 		
 		solarflower = new BlockSolarFlower(BlockInfo.SOLARFLOWER);
 		GameRegistry.registerBlock(solarflower, BlockInfo.SOLARFLOWER);
+		
+		burningflower = new BlockBurningFlower(BlockInfo.BURNINGFLOWER);
+		GameRegistry.registerBlock(burningflower, BlockInfo.BURNINGFLOWER);
 		
 		mineralBlocks = new BlockCompressedMinerals(BlockInfo.MINERALBLOCK);
 		GameRegistry.registerBlock(mineralBlocks, ItemBlockMinerals.class, BlockInfo.MINERALBLOCK);

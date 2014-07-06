@@ -39,14 +39,14 @@ public class TileEntityCable extends TileEntity implements IEnergyHandler {
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
 		
 		int sendValue = getCorrectTransferValue(maxReceive, this.getMaxEnergyStored(from));
-		System.out.println("sendValue " + sendValue);
+	//	System.out.println("sendValue " + sendValue);
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			if (dir != from && shouldContinue(simulate, dir)) {
 				int retValue = 0;
 				if (worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ) instanceof IEnergyHandler) {
 					IEnergyHandler handler = ((IEnergyHandler)worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ));
 					retValue = handler.receiveEnergy(dir.getOpposite(), sendValue, simulate);
-					System.out.println("retValue " + retValue);
+					//System.out.println("retValue " + retValue);
 					exclusionSimulate.add(dir);
 					
 					

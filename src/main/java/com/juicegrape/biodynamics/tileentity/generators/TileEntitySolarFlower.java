@@ -9,7 +9,7 @@ public class TileEntitySolarFlower extends TileEntity implements IBioGenerator {
 	@Override
 	public int getPowerGen() {
 		if (this.worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) && worldObj.isDaytime() && !worldObj.isRaining()) {
-			return 40;
+			return 10;
 		} else {
 			return 0;
 		}

@@ -27,6 +27,7 @@ public class BlockInfo {
 	public static final int ENERGETICSOIL_TIERS = 3;
 	
 	public static final String SOLARFLOWER = "solar_flower";
+	public static final String BURNINGFLOWER = "burning_flower";
 
 	public static final String MINERALBLOCK = "mineralblock";
 	public static final String[] MINERALBLOCKS = {

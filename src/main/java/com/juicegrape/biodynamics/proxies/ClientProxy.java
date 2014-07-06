@@ -9,9 +9,11 @@ import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.client.guis.GuiEnerTreeFurnace;
 import com.juicegrape.biodynamics.client.guis.GuiInfo;
 import com.juicegrape.biodynamics.client.render.ItemTERenderer;
+import com.juicegrape.biodynamics.client.render.RenderBurningFlower;
 import com.juicegrape.biodynamics.client.render.RenderCable;
 import com.juicegrape.biodynamics.tileentity.TileEntityCable;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
+import com.juicegrape.biodynamics.tileentity.generators.TileEntityBurningFlower;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -36,6 +38,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void initRenderers() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new RenderCable());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBurningFlower.class, new RenderBurningFlower());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.cableblock), new ItemTERenderer(new TileEntityCable(0)));
 	}
 	

@@ -10,6 +10,7 @@ import com.juicegrape.biodynamics.tileentity.TileEntityBatteTreeCore;
 import com.juicegrape.biodynamics.tileentity.TileEntityCable;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
 import com.juicegrape.biodynamics.tileentity.TileEntitySoil;
+import com.juicegrape.biodynamics.tileentity.generators.TileEntityBurningFlower;
 import com.juicegrape.biodynamics.tileentity.generators.TileEntitySolarFlower;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -32,6 +33,7 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntitySoil.class, BlockInfo.ENERGETICSOIL);
 		GameRegistry.registerTileEntity(TileEntitySolarFlower.class, BlockInfo.SOLARFLOWER);
 		GameRegistry.registerTileEntity(TileEntityCable.class, BlockInfo.CABLE);
+		GameRegistry.registerTileEntity(TileEntityBurningFlower.class, BlockInfo.BURNINGFLOWER);
 	}
 
 	@Override
