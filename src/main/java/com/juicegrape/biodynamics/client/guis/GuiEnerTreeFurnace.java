@@ -10,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import com.juicegrape.biodynamics.tileentity.ContainerEnerTreeFurnace;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -33,7 +35,11 @@ public class GuiEnerTreeFurnace extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		String drawString;
 		if (!furnace.isInvNameLocalized()) {
-			drawString = LanguageRegistry.instance().getStringLocalization(furnace.getInventoryName());
+			//if (FMLClientHandler.instance().getCurrentLanguage() != null) {
+			//	drawString = LanguageRegistry.instance().getStringLocalization(furnace.getInventoryName(), FMLClientHandler.instance().getCurrentLanguage());
+			//} else {
+				drawString = LanguageRegistry.instance().getStringLocalization(furnace.getInventoryName(), "en_US");
+		//	}
 		} else {
 			drawString = furnace.getInventoryName();
 		}
