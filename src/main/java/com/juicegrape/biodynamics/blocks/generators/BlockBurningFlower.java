@@ -37,8 +37,8 @@ public class BlockBurningFlower extends BioGeneratorBlock {
 		}
 		ItemStack stack = player.getCurrentEquippedItem();
 		if (stack == null) {
-			if (burning.burnable[0] != null)
-			System.out.println(burning.burnable[0].toString());
+			if (burning.burnable != null)
+			System.out.println(burning.burnable.toString());
 			return false;
 		}
 		

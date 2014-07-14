@@ -15,11 +15,11 @@ import com.juicegrape.biodynamics.tileentity.common.IBioGenerator;
 
 public class TileEntityBurningFlower extends TileEntity implements IBioGenerator, IInventory {
 	
-	public ItemStack[] burnable = new ItemStack[getSizeInventory()];;
+	public ItemStack burnable;
 	int burntime = 0;
 	
-	private static final String arrayTag = "Items";
-	private static final String slotTag = "Slot";
+	private static final String itemTag = "Burnable";
+	private static final String burnTag = "Burntime";
 	
 	public TileEntityBurningFlower() {
 		super();
@@ -37,27 +37,26 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return burnable[slot];
+		return burnable;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
 		
-		if (burnable[slot] != null) {
+		if (burnable != null) {
 			ItemStack stack;
-			if (burnable[slot].stackSize <= amount) {
-				stack = burnable[slot];
-				burnable[slot] = null;
+			if (burnable.stackSize <= amount) {
+				stack = burnable;
+				burnable = null;
 				onInventoryChanged();
 				return stack;
 			} else {
-				stack = burnable[slot].splitStack(amount);
+				stack = burnable.splitStack(amount);
 				
-				if (burnable[slot].stackSize == 0) {
-					burnable[slot] = null;
+				if (burnable.stackSize == 0) {
+					burnable = null;
 				}
 				
-				onInventoryChanged();
 				return stack;
 			}
 		} else {
@@ -74,7 +73,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		burnable[slot] = stack;
+		burnable = stack;
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
 			stack.stackSize = getInventoryStackLimit();
 		}
@@ -118,6 +117,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 	
 	public void update() {
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		this.markDirty();
 	}
 	
 	@Override
@@ -137,7 +137,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     	if (worldObj.isRemote) {
     		return;
     	}
-    	if (burntime <= 0 && burnable[0] != null && TileEntityFurnace.isItemFuel(burnable[0])) {
+    	if (burntime <= 0 && burnable != null && TileEntityFurnace.isItemFuel(burnable)) {
     		burntime = TileEntityFurnace.getItemBurnTime(decrStackSize(0, 1));
     	}
     	
@@ -153,34 +153,26 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     
     public void readFromNBT(NBTTagCompound nbt) {
     	super.readFromNBT(nbt);
-    	NBTTagList list = nbt.getTagList(arrayTag, 10);
-    	burnable = new ItemStack[this.getSizeInventory()];
     	
-    	for (int i = 0; i < list.tagCount(); i++) {
-    		NBTTagCompound nbt2 = (NBTTagCompound)list.getCompoundTagAt(i);
-    		
-    		int j = nbt2.getByte(slotTag) & 255;
-    		
-    		if (j >= 0 && j < burnable.length) {
-    			burnable[j] = ItemStack.loadItemStackFromNBT(nbt2);
-    		}
-    	}
-    	burntime = nbt.getInteger("burntime");
+    	NBTTagCompound item = nbt.getCompoundTag(itemTag);
+    	
+    	if (item != null) 
+    		burnable = ItemStack.loadItemStackFromNBT(item);
+    	
+    	burntime = nbt.getInteger(burnTag);
     }
     
     public void writeToNbt(NBTTagCompound nbt) {
     	super.writeToNBT(nbt);
-    	NBTTagList list = new NBTTagList();
     	
-    	for (int i = 0; i < burnable.length; i++) {
-    		NBTTagCompound nbt2 = new NBTTagCompound();
-    		nbt2.setByte(slotTag, (byte)i);
-    		burnable[i].writeToNBT(nbt2);
-    		list.appendTag(nbt2);
+    	if (burnable != null) {
+	    	NBTTagCompound item = new NBTTagCompound();
+	    	burnable.writeToNBT(item);
+	    	nbt.setTag(itemTag, item);
     	}
     	
-    	nbt.setTag(arrayTag, list);
-    	nbt.setInteger("burntime", burntime);
+    	
+    	nbt.setInteger(burnTag, burntime);
     }
 
 }

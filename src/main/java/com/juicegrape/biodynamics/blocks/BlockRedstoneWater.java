@@ -44,15 +44,12 @@ public class BlockRedstoneWater extends BioLiquid {
 	 @SideOnly(Side.CLIENT)
      @Override
      public void registerBlockIcons(IIconRegister register) {
-             stillIcon = register.registerIcon("water_still");
-             flowingIcon = register.registerIcon("water_flow");
+             stillIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_still_block");
+             flowingIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + this.getUnlocalizedName().replace("tile.", "") + "_flow_block");
+             ModBlocks.fluidRedstoneWater.setIcons(stillIcon, flowingIcon);
 	 }
 	 
-	 @Override
-	 @SideOnly(Side.CLIENT)
-	 public int colorMultiplier(IBlockAccess world, int x, int y, int z){
-		 return 0xFF0000;
-	 }
+
 	 
 	 @Override
 	 public void updateTick(World world, int x, int y, int z, Random random) {
