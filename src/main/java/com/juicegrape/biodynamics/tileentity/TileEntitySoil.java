@@ -14,10 +14,14 @@ public class TileEntitySoil extends TileEntity implements IEnergyHandler {
 	
 	public TileEntitySoil(int tier) {
 		buffer = new EnergyStorage(500 * tier, 100 * tier);
+		this.markDirty();
+		this.printEnergy();
 	}
 	
 	@Override
 	public void updateEntity() {
+		worldObj.markBlockForUpdate(xCoord, yCoord + 1, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		if (!worldObj.isRemote) {
 			TileEntity ent = worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
 			if (ent != null && ent instanceof IBioGenerator) {
@@ -43,6 +47,7 @@ public class TileEntitySoil extends TileEntity implements IEnergyHandler {
 			}
 			
 		}
+		super.updateEntity();
 	}
 	
 	public void printEnergy() {
@@ -58,7 +63,8 @@ public class TileEntitySoil extends TileEntity implements IEnergyHandler {
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive,
 			boolean simulate) {
-		return from != ForgeDirection.UP ? 0 : buffer.receiveEnergy(maxReceive, simulate);
+		
+		return from != ForgeDirection.UP ? 0 : worldObj.getTileEntity(xCoord + from.offsetX, yCoord + from.offsetY, zCoord + from.offsetZ) instanceof IBioGenerator ? buffer.receiveEnergy(maxReceive, simulate) : 0;
 	}
 
 	@Override

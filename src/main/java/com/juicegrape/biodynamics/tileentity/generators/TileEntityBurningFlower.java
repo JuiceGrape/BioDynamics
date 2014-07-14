@@ -23,6 +23,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 	
 	public TileEntityBurningFlower() {
 		super();
+		burnable = null;
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
-		
+		onInventoryChanged();
 		if (burnable != null) {
 			ItemStack stack;
 			if (burnable.stackSize <= amount) {
@@ -62,6 +63,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 		} else {
 			return null;
 		}
+
 		
 		
 	}
@@ -116,8 +118,9 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 	}
 	
 	public void update() {
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		this.markDirty();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
 	}
 	
 	@Override
