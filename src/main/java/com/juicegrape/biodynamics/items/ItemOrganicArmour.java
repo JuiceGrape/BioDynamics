@@ -1,5 +1,7 @@
 package com.juicegrape.biodynamics.items;
 
+import java.util.Random;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,11 +15,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemOrganicArmour extends ItemArmor {
+	
+	Random random;
 
 	public ItemOrganicArmour(String name, ArmorMaterial mat, int renderIndex, int slot) {
 		super(mat, renderIndex, slot);
 		this.setCreativeTab(biodynamics.bioTab);
 		this.setUnlocalizedName(name);
+		random = new Random();
 	}
 	
 	@Override
@@ -61,6 +66,11 @@ public class ItemOrganicArmour extends ItemArmor {
 	
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+		if (stack.getItemDamage() > 0) {
+			if (random.nextInt(500) == 1) {
+				stack.setItemDamage(stack.getItemDamage() - 1);
+			}
+		} 
 		
 	}
 	
