@@ -3,12 +3,19 @@ package com.juicegrape.biodynamics.items;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.juicegrape.biodynamics.biodynamics;
-
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.juicegrape.biodynamics.biodynamics;
+import com.juicegrape.biodynamics.items.tools.ItemOrganicAxe;
+import com.juicegrape.biodynamics.items.tools.ItemOrganicHoe;
+import com.juicegrape.biodynamics.items.tools.ItemOrganicPickaxe;
+import com.juicegrape.biodynamics.items.tools.ItemOrganicShovel;
+import com.juicegrape.biodynamics.items.tools.ItemOrganicSword;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -38,6 +45,26 @@ public class ModItems {
 	public static Item pinkDiamondBody;
 	public static Item pinkDiamondLegs;
 	public static Item pinkDiamondBoots;
+	
+	public static Item organicIronSword;
+	public static Item organicGoldSword;
+	public static Item pinkDiamondSword;
+	
+	public static Item organicIronPickaxe;
+	public static Item organicGoldPickaxe;
+	public static Item pinkDiamondPickaxe;
+	
+	public static Item organicIronAxe;
+	public static Item organicGoldAxe;
+	public static Item pinkDiamondAxe;
+	
+	public static Item organicIronShovel;
+	public static Item organicGoldShovel;
+	public static Item pinkDiamondShovel;
+	
+	public static Item organicIronHoe;
+	public static Item organicGoldHoe;
+	public static Item pinkDiamondHoe;
 
 	public static void init() {
 		
@@ -80,7 +107,48 @@ public class ModItems {
 		GameRegistry.registerItem(pinkDiamondBody, ItemInfo.PINKDIAMONDARMOUR[1]);
 		GameRegistry.registerItem(pinkDiamondLegs, ItemInfo.PINKDIAMONDARMOUR[2]);
 		GameRegistry.registerItem(pinkDiamondBoots, ItemInfo.PINKDIAMONDARMOUR[3]);
-
+		
+		organicIronSword = new ItemOrganicSword(ToolMaterial.IRON, ItemInfo.ORGANIC_SWORDS[0]);
+		organicGoldSword = new ItemOrganicSword(ToolMaterial.GOLD, ItemInfo.ORGANIC_SWORDS[1]);
+		pinkDiamondSword = new ItemOrganicSword(ToolMaterial.EMERALD, ItemInfo.ORGANIC_SWORDS[2]);
+		
+		GameRegistry.registerItem(organicIronSword, ItemInfo.ORGANIC_SWORDS[0]);
+		GameRegistry.registerItem(organicGoldSword, ItemInfo.ORGANIC_SWORDS[1]);
+		GameRegistry.registerItem(pinkDiamondSword, ItemInfo.ORGANIC_SWORDS[2]);
+		
+		organicIronPickaxe = new ItemOrganicPickaxe(ToolMaterial.IRON, ItemInfo.ORGANIC_PICKAXES[0]);
+		organicGoldPickaxe = new ItemOrganicPickaxe(ToolMaterial.GOLD, ItemInfo.ORGANIC_PICKAXES[1]);
+		pinkDiamondPickaxe = new ItemOrganicPickaxe(ToolMaterial.EMERALD, ItemInfo.ORGANIC_PICKAXES[2]);
+		
+		GameRegistry.registerItem(organicIronPickaxe, ItemInfo.ORGANIC_PICKAXES[0]);
+		GameRegistry.registerItem(organicGoldPickaxe, ItemInfo.ORGANIC_PICKAXES[1]);
+		GameRegistry.registerItem(pinkDiamondPickaxe, ItemInfo.ORGANIC_PICKAXES[2]);
+		
+		organicIronAxe = new ItemOrganicAxe(ToolMaterial.IRON, ItemInfo.ORGANIC_AXES[0]);
+		organicGoldAxe = new ItemOrganicAxe(ToolMaterial.GOLD, ItemInfo.ORGANIC_AXES[1]);
+		pinkDiamondAxe = new ItemOrganicAxe(ToolMaterial.EMERALD, ItemInfo.ORGANIC_AXES[2]);
+		
+		GameRegistry.registerItem(organicIronAxe, ItemInfo.ORGANIC_AXES[0]);
+		GameRegistry.registerItem(organicGoldAxe, ItemInfo.ORGANIC_AXES[1]);
+		GameRegistry.registerItem(pinkDiamondAxe, ItemInfo.ORGANIC_AXES[2]);
+		
+		organicIronShovel = new ItemOrganicShovel(ToolMaterial.IRON, ItemInfo.ORGANIC_SHOVELS[0]);
+		organicGoldShovel = new ItemOrganicShovel(ToolMaterial.GOLD, ItemInfo.ORGANIC_SHOVELS[1]);
+		pinkDiamondShovel = new ItemOrganicShovel(ToolMaterial.EMERALD, ItemInfo.ORGANIC_SHOVELS[2]);
+		
+		GameRegistry.registerItem(organicIronShovel, ItemInfo.ORGANIC_SHOVELS[0]);
+		GameRegistry.registerItem(organicGoldShovel, ItemInfo.ORGANIC_SHOVELS[1]);
+		GameRegistry.registerItem(pinkDiamondShovel, ItemInfo.ORGANIC_SHOVELS[2]);
+		
+		organicIronHoe = new ItemOrganicHoe(ToolMaterial.IRON, ItemInfo.ORGANIC_HOES[0]);
+		organicGoldHoe = new ItemOrganicHoe(ToolMaterial.GOLD, ItemInfo.ORGANIC_HOES[1]);
+		pinkDiamondHoe = new ItemOrganicHoe(ToolMaterial.EMERALD, ItemInfo.ORGANIC_HOES[2]);
+		
+		GameRegistry.registerItem(organicIronHoe, ItemInfo.ORGANIC_HOES[0]);
+		GameRegistry.registerItem(organicGoldHoe, ItemInfo.ORGANIC_HOES[1]);
+		GameRegistry.registerItem(pinkDiamondHoe, ItemInfo.ORGANIC_HOES[2]);
+		
+		
 
 	}
 	

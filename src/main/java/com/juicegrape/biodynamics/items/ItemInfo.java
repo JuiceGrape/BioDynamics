@@ -36,5 +36,15 @@ public class ItemInfo {
 	
 	public static final String[] PINKDIAMONDARMOUR = {"pink_diamond_helmet", "pink_diamond_body", "pink_diamond_legs", "pink_diamond_boots"};
 	public static final String PINKDIAMONDARMOURRENDER = "pink_diamond_armour";
+	
+	public static final String[] ORGANIC_SWORDS = {"organic_iron_sword", "organic_gold_sword", "pink_diamond_sword"};
+	
+	public static final String[] ORGANIC_SHOVELS = {"organic_iron_shovel", "organic_gold_shovel", "pink_diamond_shovel"};
+	
+	public static final String[] ORGANIC_PICKAXES = {"organic_iron_pickaxe", "organic_gold_pickaxe", "pink_diamond_pickaxe"};
+	
+	public static final String[] ORGANIC_AXES = {"organic_iron_axe", "organic_gold_axe", "pink_diamond_axe"};
+	
+	public static final String[] ORGANIC_HOES = {"organic_iron_hoe", "organic_gold_hoe", "pink_diamond_hoe"};
 
 }

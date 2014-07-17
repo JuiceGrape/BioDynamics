@@ -118,6 +118,9 @@ public class CommonRecipes {
 			Character.valueOf('w'), new ItemStack(ModBlocks.enertreePlanks)
 		});
 		
+		
+		ArmourToolRecipes.init();
+		
 	}
 
 }
