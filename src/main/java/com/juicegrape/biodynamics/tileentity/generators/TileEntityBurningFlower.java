@@ -70,7 +70,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
-		return null;
+		return burnable;
 	}
 
 	@Override
@@ -154,6 +154,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     	return burntime > 0;
     }
     
+    @Override
     public void readFromNBT(NBTTagCompound nbt) {
     	super.readFromNBT(nbt);
     	
@@ -165,7 +166,8 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     	burntime = nbt.getInteger(burnTag);
     }
     
-    public void writeToNbt(NBTTagCompound nbt) {
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
     	super.writeToNBT(nbt);
     	
     	if (burnable != null) {

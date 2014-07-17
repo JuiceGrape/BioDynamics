@@ -65,7 +65,7 @@ public class RenderBurningFlower extends TileEntitySpecialRenderer {
     	
     	GL11.glTranslatef((float) x, (float) y, (float) z);
     	
-    	GL11.glTranslatef(0.5F, 0.5F + bob , 0.5F);
+    	GL11.glTranslatef(0.5F, 0.3F + bob , 0.5F);
     	GL11.glColor3f(1F, 1F, 1F);
     	
     	if (Minecraft.isFancyGraphicsEnabled()) {
