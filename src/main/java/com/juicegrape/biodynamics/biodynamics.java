@@ -9,6 +9,7 @@ import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.config.ConfigHandler;
 import com.juicegrape.biodynamics.items.ModItems;
 import com.juicegrape.biodynamics.network.BucketHandler;
+import com.juicegrape.biodynamics.network.CommonEventHandler;
 import com.juicegrape.biodynamics.network.ModEventHandler;
 import com.juicegrape.biodynamics.proxies.CommonProxy;
 import com.juicegrape.biodynamics.recipes.CommonRecipes;
@@ -67,6 +68,7 @@ public class biodynamics {
 		
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModEventHandler.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(CommonEventHandler.INSTANCE);
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 		
