@@ -1,7 +1,6 @@
 BLOCKS:
 
 General:
-tile.redstonewater.name=Redstone Water
 tile.battetree_core.name=Battetree Core
 
 Enertree:
@@ -18,12 +17,28 @@ tile.energy_soil2.name=tier3 soil
 
 Generators:
 tile.solar_flower.name=SolarFlower
+tile.burning_flower.name=Burning Flower
+
+Material blocks:
+tile.pink_diamond_block.name=Block of Pink Diamond
+tile.organic_iron_block.name=Block of Organic Iron
+tile.organic_gold_block.name=Block of Organic Gold
+
+Cables:
+tile.energy_cable.name=Enertree Cable (INDEV, MIGHT CRASH)
+
+Fluids:
+tile.redstonewater.name=Redstone Water
+fluid.redstonewater=Redstone Water
+
 
 -----------------------------------------------
 ITEMS:
 
 General:
 item.redstonewater_bucket.name=Redstone Water Bucket
+item.pestle.name=Diamond tipped Pestle
+item.mortar_and_pestle.name=Mortar and Pestle
 
 Bonemeals:
 item.specialbonemeal0.name=Redstone Bonemeal
@@ -41,6 +56,41 @@ item.organic_iron_dust.name=Organic Iron Dust
 item.organic_gold_dust.name=Organic Gold Dust
 item.iron_dust.name=Iron Dust
 item.gold_dust.name=Gold Dust
+
+Armour:
+item.organic_iron_helmet.name=Organic Iron Helmet
+item.organic_iron_body.name=Organic Iron Chestplate
+item.organic_iron_legs.name=Organic Iron Leggings
+item.organic_iron_boots.name=Organic Iron Boots
+
+item.organic_gold_helmet.name=Organic Gold Helmet
+item.organic_gold_body.name=Organic Gold Chestplate
+item.organic_gold_legs.name=Organic Gold Leggings
+item.organic_gold_boots.name=Organic Gold Boots
+
+item.pink_diamond_helmet.name=Pink Diamond Helmet
+item.pink_diamond_body.name=Pink Diamond Chestplate
+item.pink_diamond_legs.name=Pink Diamond Leggings
+item.pink_diamond_boots.name=Pink Diamond Boots
+
+tools:
+item.organic_iron_sword.name=Organic Iron Sword
+item.organic_iron_hoe.name=Organic Iron Hoe
+item.organic_iron_pickaxe.name=Organic Iron Pickaxe
+item.organic_iron_shovel.name=Organic Iron Shovel
+item.organic_iron_axe.name=Organic Iron Axe
+
+item.organic_gold_sword.name=Organic Gold Sword
+item.organic_gold_hoe.name=Organic Gold Hoe
+item.organic_gold_pickaxe.name=Organic Gold Pickaxe
+item.organic_gold_shovel.name=Organic Gold Shovel
+item.organic_gold_axe.name=Organic Gold Axe
+
+item.pink_diamond_sword.name=Pink Diamond Sword
+item.pink_diamond_hoe.name=Pink Diamond Hoe
+item.pink_diamond_pickaxe.name=Pink Diamond Pickaxe
+item.pink_diamond_shovel.name=Pink Diamond Shovel
+item.pink_diamond_axe.name=Pink Diamond Axe
 
 
 ------------------------------------------------------------
