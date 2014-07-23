@@ -20,6 +20,9 @@ public class CommonEventHandler {
 	@SubscribeEvent
 	public void onDiamondDrop(HarvestDropsEvent event) {
 		
+		
+		
+		
 		if (event.isSilkTouching || !event.block.equals(Blocks.diamond_ore))
 			return;
 		
