@@ -69,7 +69,10 @@ public class IngotCrushRecipes {
 			ItemStack dust = getOredictItem("dust" + ing);
 			String ingot = "ingot" + ing;
 			if (hasBoth(ing) && dust != null) {
-				recipes.put(ingot, dust);
+				GameRegistry.addRecipe(new ShapelessOreRecipe(dust, new Object[] {
+						new ItemStack(ModItems.mortarAndPestle, 1, OreDictionary.WILDCARD_VALUE) ,
+						ingot
+				}));
 			}
 		}
 	}
