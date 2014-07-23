@@ -24,8 +24,7 @@ public class ItemInfo {
 /*5*/		"organic_gold_ingot",
 /*6*/		"organic_gold_nugget",
 /*7*/		"organic_gold_dust",
-/*8*/		"gold_dust",
-/*9*/		"pestle"
+/*8*/		"gold_dust"
 	};
 	public static final String CRAFTINGITEM = "craftingitem";
 	
@@ -47,7 +46,5 @@ public class ItemInfo {
 	public static final String[] ORGANIC_AXES = {"organic_iron_axe", "organic_gold_axe", "pink_diamond_axe"};
 	
 	public static final String[] ORGANIC_HOES = {"organic_iron_hoe", "organic_gold_hoe", "pink_diamond_hoe"};
-	
-	public static final String ITEMMORTARPESTLE = "mortar_and_pestle";
 
 }

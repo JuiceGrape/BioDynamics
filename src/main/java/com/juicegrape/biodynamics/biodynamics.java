@@ -13,7 +13,6 @@ import com.juicegrape.biodynamics.network.CommonEventHandler;
 import com.juicegrape.biodynamics.network.ModEventHandler;
 import com.juicegrape.biodynamics.proxies.CommonProxy;
 import com.juicegrape.biodynamics.recipes.CommonRecipes;
-import com.juicegrape.biodynamics.recipes.IngotCrushRecipes;
 import com.juicegrape.biodynamics.recipes.OrganicIngotRecipe;
 import com.juicegrape.biodynamics.villagers.VillagerHandler;
 
@@ -85,8 +84,6 @@ public class biodynamics {
 	public void postInit(FMLPostInitializationEvent event) {
 		
 		OrganicIngotRecipe.init();
-		
-		IngotCrushRecipes.init();
 
 	}
 

@@ -3,7 +3,6 @@ package com.juicegrape.biodynamics.items;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
@@ -66,8 +65,6 @@ public class ModItems {
 	public static Item organicIronHoe;
 	public static Item organicGoldHoe;
 	public static Item pinkDiamondHoe;
-	
-	public static Item mortarAndPestle;
 
 	public static void init() {
 		
@@ -151,18 +148,11 @@ public class ModItems {
 		GameRegistry.registerItem(organicGoldHoe, ItemInfo.ORGANIC_HOES[1]);
 		GameRegistry.registerItem(pinkDiamondHoe, ItemInfo.ORGANIC_HOES[2]);
 		
-		mortarAndPestle = new ItemMortarPestle(ItemInfo.ITEMMORTARPESTLE);
-		
-		GameRegistry.registerItem(mortarAndPestle, ItemInfo.ITEMMORTARPESTLE);
-		
 		
 
 	}
 	
 	public static void initOreDict() {
-		
-		OreDictionary.registerOre("gemDiamond", new ItemStack(craftingItem));
-		
 		OreDictionary.registerOre("dustIron", new ItemStack(craftingItem, 1, 4));
 		OreDictionary.registerOre("dustGold", new ItemStack(craftingItem, 1, 8));
 		

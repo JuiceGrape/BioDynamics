@@ -6,7 +6,6 @@ import java.util.Map;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.items.ModItems;
@@ -119,26 +118,8 @@ public class CommonRecipes {
 			Character.valueOf('w'), new ItemStack(ModBlocks.enertreePlanks)
 		});
 		
-		//Mortar and pestle
-		GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.mortarAndPestle, new Object[] {
-				"b/b",
-				" b ",
-				Character.valueOf('/'), new ItemStack(ModItems.craftingItem, 1, 9),
-				Character.valueOf('b'), "ingotIron"
-		}));
-		
-		//Mortar and pestle
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.craftingItem, 1, 9), new Object[] {
-				"  /",
-				" / ",
-				"d  ",
-				Character.valueOf('/'), "stickWood",
-				Character.valueOf('d'), "gemDiamond"	
-		}));
-		
 		
 		ArmourToolRecipes.init();
-		
 		
 	}
 
