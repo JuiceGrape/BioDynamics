@@ -1,16 +1,18 @@
 package com.juicegrape.biodynamics.tileentity.generators;
 
+import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 
+import com.juicegrape.biodynamics.misc.ItemEntityHelper;
 import com.juicegrape.biodynamics.tileentity.common.IBioGenerator;
 
 public class TileEntityBurningFlower extends TileEntity implements IBioGenerator, IInventory {
@@ -140,8 +142,27 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     	if (worldObj.isRemote) {
     		return;
     	}
+    	
+    	if (burnable != null && !TileEntityFurnace.isItemFuel(burnable)) {
+    		EntityPlayer player = worldObj.getClosestPlayer(xCoord, yCoord, zCoord, 5);
+    		if (player != null) {
+    			worldObj.spawnEntityInWorld(ItemEntityHelper.createItemTowardsPlayer(burnable, worldObj, xCoord, yCoord, zCoord, player));
+    		} else {
+    			worldObj.spawnEntityInWorld(ItemEntityHelper.createItem(burnable, worldObj, xCoord, yCoord, zCoord));
+    		}
+    		burnable = null;
+    		this.update();
+    		return;
+    		
+    	}
     	if (burntime <= 0 && burnable != null && TileEntityFurnace.isItemFuel(burnable)) {
-    		burntime = TileEntityFurnace.getItemBurnTime(decrStackSize(0, 1));
+    		burntime = TileEntityFurnace.getItemBurnTime(this.burnable) + 1; 
+    		if (this.burnable.getItem().hasContainerItem(burnable)) {
+    			burnable = burnable.getItem().getContainerItem(burnable);
+    		} else {
+    			this.decrStackSize(0, 1);
+    		}
+    		this.update();
     	}
     	
     	if (isBurning()) {
@@ -179,5 +200,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     	
     	nbt.setInteger(burnTag, burntime);
     }
+    
+   
 
 }

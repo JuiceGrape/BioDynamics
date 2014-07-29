@@ -56,29 +56,28 @@ public class BlockRedstoneWater extends BioLiquid {
 		 super.updateTick(world, x, y, z, random);
 		 if (world.isRemote)
 			 return;
-		 int checkx = x;
+		 int checkx = x + random.nextInt(10) - 4;
 		 int checky = y + 1;
-		 int checkz = z;
+		 int checkz = z + random.nextInt(10) - 4;
 		 if (world.getBlockMetadata(x, y, z) == 0) {
-			 for (int i = -5; i <= 5; i++) {
-				 for (int j = -5; j <= 5; j++) {
-					 Block sapling = world.getBlock(checkx + i, checky, checkz + j);
-					 if (sapling != null) {
-						 if (
-								 random.nextInt(20) == 1 && 
-								 !(sapling instanceof BlockEnerTreeSapling) &&
-								 OreDictionaryHelper.isStackEqual(new ItemStack(sapling), new ItemStack(Blocks.sapling))) {
-							 
-							 world.setBlock(checkx + i, checky, checkz + j, ModBlocks.enerTreeSapling);
-							 world.setBlock(x, y, z, Blocks.water);
-							 world.markBlockForUpdate(x, y, z);
-							 
-							 return;
-						 }
-					 }
-				 }
+			 
+			 Block sapling = world.getBlock(checkx, checky, checkz);
+			 if (sapling != null && !(sapling instanceof BlockEnerTreeSapling) && OreDictionaryHelper.isStackEqual(new ItemStack(sapling), new ItemStack(Blocks.sapling))) {
+				 
+				 world.setBlock(checkx, checky, checkz, ModBlocks.enerTreeSapling);
+				 world.setBlock(x, y, z, Blocks.water);
+				 world.markBlockForUpdate(x, y, z);
+				 
+				 return;
+				 
+				 
 			 }
+			
 		 }
+		 
+		 
+		 
+		 
 	 }
 	 
 	 public boolean canProvidePower() {
@@ -89,5 +88,15 @@ public class BlockRedstoneWater extends BioLiquid {
 		 int returnvalue =15 - world.getBlockMetadata(x, y, z) * 2;
 		 return returnvalue > 0 ? returnvalue : 0;
 	 }
+	 
+	 public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
+		 if (world.getBlock(x, y, z).equals(Blocks.water) || world.getBlock(x, y, z).equals(Blocks.flowing_water)) {
+			 return false;
+		 } else {
+			 return super.canDisplace(world, x, y, z);
+		 }
+	 }
+	 
+	 
 
 }

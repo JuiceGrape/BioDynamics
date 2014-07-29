@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.juicegrape.biodynamics.blocks.common.BioGeneratorBlock;
+import com.juicegrape.biodynamics.misc.ItemEntityHelper;
 import com.juicegrape.biodynamics.tileentity.generators.TileEntityBurningFlower;
 
 import cpw.mods.fml.relauncher.Side;
@@ -33,14 +34,9 @@ public class BlockBurningFlower extends BioGeneratorBlock {
 		}
 		TileEntityBurningFlower burning = (TileEntityBurningFlower)world.getTileEntity(x, y, z);
 		if (burning == null) {
-			return false;
+			return true;
 		}
 		ItemStack stack = player.getCurrentEquippedItem();
-		if (stack == null) {
-			if (burning.burnable != null)
-			System.out.println(burning.burnable.toString());
-			return false;
-		}
 		
 		
 		if(burning.getStackInSlot(0) == null) {
@@ -50,11 +46,9 @@ public class BlockBurningFlower extends BioGeneratorBlock {
 				return true;
 			}
 		} else {
-			if (burning.isBurning()) {
-				System.out.println("Has item and is burning");
-			} else {
-				System.out.println("has item but is not burning");
-			}
+			world.spawnEntityInWorld(ItemEntityHelper.createItemTowardsPlayer(burning.burnable, world, x, y, z, player));
+			burning.burnable = null;
+			burning.update();
 		}
 		
 		return false;
