@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.juicegrape.biodynamics.biodynamics;
+import com.juicegrape.biodynamics.items.tools.ItemHappinessMeter;
 import com.juicegrape.biodynamics.items.tools.ItemOrganicAxe;
 import com.juicegrape.biodynamics.items.tools.ItemOrganicHoe;
 import com.juicegrape.biodynamics.items.tools.ItemOrganicPickaxe;
@@ -68,6 +69,8 @@ public class ModItems {
 	public static Item pinkDiamondHoe;
 	
 	public static Item mortarAndPestle;
+	
+	public static Item happinessMeter;
 
 	public static void init() {
 		
@@ -154,6 +157,10 @@ public class ModItems {
 		mortarAndPestle = new ItemMortarPestle(ItemInfo.ITEMMORTARPESTLE);
 		
 		GameRegistry.registerItem(mortarAndPestle, ItemInfo.ITEMMORTARPESTLE);
+		
+		happinessMeter = new ItemHappinessMeter(ItemInfo.ITEMHAPPINESSMETER);
+		
+		GameRegistry.registerItem(happinessMeter, ItemInfo.ITEMHAPPINESSMETER);
 		
 		
 

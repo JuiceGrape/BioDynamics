@@ -4,25 +4,43 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyHandler;
 
-import com.juicegrape.biodynamics.tileentity.common.TileEntityBattery;
-
-public class TileEntityCable extends TileEntityBattery {
+public class TileEntityCable extends TileEntity implements IEnergyHandler {
+	
+	protected EnergyStorage battery;
 
 	public TileEntityCable(int tier) {
-		super(500000, 100, 100);
+		super();
+		battery = new EnergyStorage(800 * tier, 400 * tier, 400 * tier);
 	}
 	
 	@Override
 	public void updateEntity() {
-		this.battery.setMaxExtract(Math.max(Math.min(this.battery.getEnergyStored() / 8, 100), 10));
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (te != null && te instanceof TileEntityCable) {
+				TileEntityCable cable = (TileEntityCable)te;
+				int combinedEnergy = (this.getEnergyStored(dir.getOpposite()) + cable.getEnergyStored(dir)) / 2;
+				this.setEnergyStored(combinedEnergy);
+				cable.setEnergyStored(combinedEnergy);
+			}
+		}
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (te != null && te instanceof IEnergyHandler && !(te instanceof TileEntityCable)) {
+				IEnergyHandler handler = (IEnergyHandler)te;
+				int handleEnergy = getCorrectTransferValue(handler.receiveEnergy(dir.getOpposite(), battery.getMaxExtract(), true), this.extractEnergy(dir, battery.getMaxExtract(), true));
+				if (handleEnergy != 0){
+					handler.receiveEnergy(dir.getOpposite(), handleEnergy, false);
+					this.extractEnergy(dir, handleEnergy , false);
+				}
+			}
+		}
 		super.updateEntity();
-	}
-
-	
-	public void printEnergy() {
-		super.printEnergy();
-		System.out.println("maxtransfer = " + this.battery.getMaxExtract());
 	}
 	
 	@Override
@@ -37,4 +55,51 @@ public class TileEntityCable extends TileEntityBattery {
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
     	readFromNBT(pkt.func_148857_g());
     }
+    
+    @Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		battery.readFromNBT(nbt);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		battery.writeToNBT(nbt);
+	}
+
+	@Override
+	public boolean canConnectEnergy(ForgeDirection from) {
+		return true;
+	}
+
+	@Override
+	public int receiveEnergy(ForgeDirection from, int maxReceive,
+			boolean simulate) {
+		return battery.receiveEnergy(maxReceive, simulate);
+	}
+
+	@Override
+	public int extractEnergy(ForgeDirection from, int maxExtract,
+			boolean simulate) {
+		return battery.extractEnergy(maxExtract, simulate);
+	}
+
+	@Override
+	public int getEnergyStored(ForgeDirection from) {
+		return battery.getEnergyStored();
+	}
+
+	@Override
+	public int getMaxEnergyStored(ForgeDirection from) {
+		return battery.getMaxEnergyStored();
+	}
+	
+	public void setEnergyStored(int energy) {
+		battery.setEnergyStored(energy);
+	}
+	
+	protected int getCorrectTransferValue(int transfer, int extract) {
+		return Math.min(transfer, extract);
+	}
 }

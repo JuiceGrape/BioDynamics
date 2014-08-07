@@ -90,11 +90,13 @@ public class BlockRedstoneWater extends BioLiquid {
 	 }
 	 
 	 public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
-		 if (world.getBlock(x, y, z).equals(Blocks.water) || world.getBlock(x, y, z).equals(Blocks.flowing_water)) {
+		 
+		 return false;
+	/*	 if (world.getBlock(x, y, z).equals(Blocks.water) || world.getBlock(x, y, z).equals(Blocks.flowing_water)) {
 			 return false;
 		 } else {
 			 return super.canDisplace(world, x, y, z);
-		 }
+		 } */
 	 }
 	 
 	 

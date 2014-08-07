@@ -6,6 +6,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import com.juicegrape.biodynamics.blocks.BlockEnergySoil;
+import com.juicegrape.biodynamics.tileentity.common.IBioGenerator;
 
 public class BioGeneratorBlock extends BioTileEntityBlock {
 
@@ -66,6 +67,11 @@ public class BioGeneratorBlock extends BioTileEntityBlock {
 	@Override
 	public int getRenderType() {
 		return 1;
+	}
+	
+	public int getHappiness(World world, int x, int y, int z) {
+		IBioGenerator gen = (IBioGenerator)world.getTileEntity(x, y, z);
+		return gen.getHappiness();
 	}
 
 }

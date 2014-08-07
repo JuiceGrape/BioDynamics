@@ -51,5 +51,7 @@ public class ItemInfo {
 	public static final String[] ORGANIC_HOES = {"organic_iron_hoe", "organic_gold_hoe", "pink_diamond_hoe"};
 	
 	public static final String ITEMMORTARPESTLE = "mortar_and_pestle";
+	
+	public static final String ITEMHAPPINESSMETER = "happiness_meter";
 
 }

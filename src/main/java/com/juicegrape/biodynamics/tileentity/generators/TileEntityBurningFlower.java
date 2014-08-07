@@ -200,6 +200,11 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     	
     	nbt.setInteger(burnTag, burntime);
     }
+
+	@Override
+	public int getHappiness() {
+		return 50;
+	}
     
    
 

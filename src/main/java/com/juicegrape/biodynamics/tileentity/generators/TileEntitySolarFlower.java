@@ -14,5 +14,10 @@ public class TileEntitySolarFlower extends TileEntity implements IBioGenerator {
 			return 0;
 		}
 	}
+	
+	@Override
+	public int getHappiness() {
+		return 50;
+	}
 
 }
