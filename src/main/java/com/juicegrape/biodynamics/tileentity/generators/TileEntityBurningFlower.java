@@ -20,17 +20,27 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 	public ItemStack burnable;
 	int burntime = 0;
 	
+	protected int happiness;
+	protected int fullness;
+	
+	private static final String fullTag = "happiness";
+	private static final String happyTag = "fullness";
+	
+	private static final int updateRate = 10;
+	
 	private static final String itemTag = "Burnable";
 	private static final String burnTag = "Burntime";
 	
 	public TileEntityBurningFlower() {
 		super();
 		burnable = null;
+		happiness = 50;
+		fullness = 100;
 	}
 
 	@Override
 	public int getPowerGen() {
-		return burntime > 0 ? 50 : 0;
+		return burntime > 0 ? happiness < 25 ? 20 : happiness > 75 ? 60 : 40 : 0;
 	}
 
 	@Override
@@ -167,7 +177,38 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     	
     	if (isBurning()) {
     		burntime--;
+    		if (worldObj.rand.nextInt(updateRate) == 1)
+    			fullness++;
+    	} else if (worldObj.rand.nextInt(updateRate) == 1) {
+    		fullness--;
     	}
+    	
+    	//Adjusting happiness because of fullness
+    	if (worldObj.rand.nextInt(updateRate) == 1) {
+    		if (fullness < 25) {
+    			happiness-=2;
+    		} else if (fullness < 50) {
+    			happiness--;
+    		} else if (fullness <= 100) {
+    			happiness++;
+    		} else if (fullness >= 145) {
+    			happiness+=2;
+    		}
+
+    	}
+    	
+    	//some end adjustments to make sure the values don't go above/below the wanted levels
+    	if (happiness > 100)
+    		happiness = 100;
+    	if (happiness < 1)
+    		happiness = 1;
+    	if (fullness > 150)
+    		fullness = 150;
+    	if (fullness < 0)
+    		fullness = 0;
+
+    	
+    	
     	super.updateEntity();
     }
     
@@ -184,6 +225,8 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     	if (item != null) 
     		burnable = ItemStack.loadItemStackFromNBT(item);
     	
+    	happiness = nbt.getInteger(happyTag);
+    	fullness = nbt.getInteger(fullTag);
     	burntime = nbt.getInteger(burnTag);
     }
     
@@ -197,13 +240,14 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 	    	nbt.setTag(itemTag, item);
     	}
     	
-    	
+    	nbt.setInteger(happyTag, happiness);
+    	nbt.setInteger(fullTag, fullness);
     	nbt.setInteger(burnTag, burntime);
     }
 
 	@Override
 	public int getHappiness() {
-		return 50;
+		return happiness;
 	}
     
    
