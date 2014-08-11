@@ -41,9 +41,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(enerTreeSapling, BlockInfo.ENERTREESAPLING);
 		
 		fluidRedstoneWater = new Fluid(BlockInfo.REDSTONEWATER);
-		fluidRedstoneWater.setDensity(900);
 		fluidRedstoneWater.setLuminosity(15);
-		fluidRedstoneWater.setViscosity(900);
 		FluidRegistry.registerFluid(fluidRedstoneWater);
 		
 		redstoneWater = new BlockRedstoneWater(fluidRedstoneWater, BlockInfo.REDSTONEWATER);

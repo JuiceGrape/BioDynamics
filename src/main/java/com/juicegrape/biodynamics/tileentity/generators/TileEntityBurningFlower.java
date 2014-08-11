@@ -26,7 +26,7 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
 	private static final String fullTag = "happiness";
 	private static final String happyTag = "fullness";
 	
-	private static final int updateRate = 10;
+	private static final int updateRate = 100;
 	
 	private static final String itemTag = "Burnable";
 	private static final String burnTag = "Burntime";

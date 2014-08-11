@@ -35,11 +35,7 @@ public class GuiEnerTreeFurnace extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		String drawString;
 		if (!furnace.isInvNameLocalized()) {
-			//if (FMLClientHandler.instance().getCurrentLanguage() != null) {
-			//	drawString = LanguageRegistry.instance().getStringLocalization(furnace.getInventoryName(), FMLClientHandler.instance().getCurrentLanguage());
-			//} else {
-				drawString = LanguageRegistry.instance().getStringLocalization(furnace.getInventoryName(), "en_US");
-		//	}
+			drawString = LanguageRegistry.instance().getStringLocalization(furnace.getInventoryName());
 		} else {
 			drawString = furnace.getInventoryName();
 		}
