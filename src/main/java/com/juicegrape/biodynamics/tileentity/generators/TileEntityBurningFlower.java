@@ -191,8 +191,6 @@ public class TileEntityBurningFlower extends TileEntity implements IBioGenerator
     			happiness--;
     		} else if (fullness <= 100) {
     			happiness++;
-    		} else if (fullness >= 145) {
-    			happiness+=2;
     		}
 
     	}
