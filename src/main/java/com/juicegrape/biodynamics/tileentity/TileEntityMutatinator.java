@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidTank;
 import cofh.api.energy.EnergyStorage;
@@ -17,6 +18,8 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	protected FluidTank redWaterTank = new FluidTank(8000);
 	protected FluidTank lavaTank = new FluidTank(8000);
 	
+	protected ItemStack[] slots;
+	
 	String redWaterTankTag = "redWaterTank";
 	String lavaTankTag = "lavaTank";
 	
@@ -28,6 +31,13 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	String burntimeTag = "burntime";
 	String maxBurntimeTag = "maxBurntime";
 	String heatTag = "heat";
+	
+	public TileEntityMutatinator() {
+		 slots = new ItemStack[12];
+		 burntime = 0;
+		 maxBurntime = 0;
+		 heat = 0;
+	}
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {return true;}
@@ -94,74 +104,67 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 
 	@Override
 	public int getSizeInventory() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 12;
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int p_70301_1_) {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemStack getStackInSlot(int slot) {
+		return slots[slot];
 	}
 
 	@Override
 	public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {return null;}
 
 	@Override
 	public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public String getInventoryName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean hasCustomInventoryName() {return false;}
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 64;
 	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
+	public void openInventory() {}
+
+	@Override
+	public void closeInventory() {}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		switch (slot) {
+		case 1:
+		case 3:
+		case 4:
+			return false;
+		case 0:
+		case 2:
+			return true;
+		case 11:
+			return TileEntityFurnace.isItemFuel(stack);
+		default:
+			return true;
 		
-	}
-
-	@Override
-	public void closeInventory() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-		// TODO Auto-generated method stub
-		return false;
+		}
 	}
 
 }
