@@ -1,5 +1,9 @@
 package com.juicegrape.biodynamics.tileentity;
 
+import com.juicegrape.biodynamics.blocks.BlockMutatinator;
+import com.juicegrape.biodynamics.blocks.ModBlocks;
+
+import net.minecraft.block.BlockMushroom;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -32,13 +36,35 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	String maxBurntimeTag = "maxBurntime";
 	String heatTag = "heat";
 	
+	private float returner;
+	boolean up;
+	
 	public TileEntityMutatinator() {
 		 slots = new ItemStack[12];
 		 burntime = 0;
 		 maxBurntime = 0;
 		 heat = 0;
+		 returner = 0.0F;
+		 up = true;
 	}
 
+	
+	@Override
+	public void updateEntity() {
+		if (up) {
+			returner+=0.1F;
+		} else {
+			returner-=0.1F;
+		}
+		
+		if (returner >= 100.0F) {
+			up = false;
+		} else if (returner <= 0.0F) {
+			up = true;
+		}
+		
+	}
+	
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {return true;}
 
@@ -61,15 +87,18 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	}
 	
 	public float getScaledEnergyStored() {
-		return battery.getEnergyStored() / battery.getMaxEnergyStored() * 100.0F;
+	//	return battery.getEnergyStored() / battery.getMaxEnergyStored() * 100.0F;
+		return returner;
 	}
 	
 	public float getScaledHeatStored() {
-		return heat / maxHeat * 100.0F;
+	//	return heat / maxHeat * 100.0F;
+		return returner;
 	}
 	
 	public float getBurntimeScaled() {
-		return burntime / maxBurntime * 100.0F;
+	//	return burntime / maxBurntime * 100.0F;
+		return returner;
 	}
 	
 	@Override
@@ -127,7 +156,7 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 
 	@Override
 	public String getInventoryName() {
-		return null;
+		return ModBlocks.mutatinator.getLocalizedName();
 	}
 
 	@Override
@@ -166,5 +195,7 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		
 		}
 	}
+	
+	
 
 }

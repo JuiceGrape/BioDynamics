@@ -8,11 +8,13 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.client.guis.GuiEnerTreeFurnace;
 import com.juicegrape.biodynamics.client.guis.GuiInfo;
+import com.juicegrape.biodynamics.client.guis.GuiMutatinator;
 import com.juicegrape.biodynamics.client.render.ItemTERenderer;
 import com.juicegrape.biodynamics.client.render.RenderBurningFlower;
 import com.juicegrape.biodynamics.client.render.RenderCable;
 import com.juicegrape.biodynamics.tileentity.TileEntityCable;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
+import com.juicegrape.biodynamics.tileentity.TileEntityMutatinator;
 import com.juicegrape.biodynamics.tileentity.generators.TileEntityBurningFlower;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -47,6 +49,8 @@ public class ClientProxy extends CommonProxy {
 		switch(ID) {
 		case GuiInfo.GUI_ENERTREEFURNACE_ID:
 			return new GuiEnerTreeFurnace(player.inventory ,(TileEntityEnerTreeFurnace)world.getTileEntity(x, y, z));
+		case GuiInfo.GUI_MUTATINATOR_ID:
+			return new GuiMutatinator(player.inventory, (TileEntityMutatinator)world.getTileEntity(x, y, z));
 		default:
 			return null;
 		}

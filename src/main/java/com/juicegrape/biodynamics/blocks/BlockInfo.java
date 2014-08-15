@@ -37,6 +37,8 @@ public class BlockInfo {
 	
 	public static final String CABLE = "energy_cable";
 	
+	public static final String MUTATINATOR = "Mutatinator";
+	
 	
 	
 	

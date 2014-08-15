@@ -32,6 +32,7 @@ public class ModBlocks {
 	public static Block burningflower;
 	public static Block mineralBlocks;
 	public static Block cableblock;
+	public static Block mutatinator;
 	
 	
 	
@@ -76,6 +77,9 @@ public class ModBlocks {
 		
 		cableblock = new BlockEnergyCable(BlockInfo.CABLE);
 		GameRegistry.registerBlock(cableblock, BlockInfo.CABLE);
+		
+		mutatinator = new BlockMutatinator(BlockInfo.MUTATINATOR);
+		GameRegistry.registerBlock(mutatinator, BlockInfo.MUTATINATOR);
 		
 		addOreDict();
 		

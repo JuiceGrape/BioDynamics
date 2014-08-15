@@ -7,8 +7,8 @@ import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import com.juicegrape.biodynamics.tileentity.ContainerEnerTreeFurnace;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
+import com.juicegrape.biodynamics.tileentity.containers.ContainerEnerTreeFurnace;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;

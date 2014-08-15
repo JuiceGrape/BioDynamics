@@ -41,11 +41,6 @@ public class BlockEnerTreeFurnace extends BioTileEntityBlock {
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (player.isSneaking()) {
-			System.out.println(world.isRemote);
-			System.out.println(world.getBlockMetadata(x, y, z));
-			return true;
-		}
 		TileEntityEnerTreeFurnace furnace = (TileEntityEnerTreeFurnace)world.getTileEntity(x, y, z);
 		if (furnace != null) {
 			player.openGui(biodynamics.instance, GuiInfo.GUI_ENERTREEFURNACE_ID, world, x, y, z);

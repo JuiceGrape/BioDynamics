@@ -14,5 +14,8 @@ public class GuiInfo {
 	public static final int GUI_ENERTREEFURNACE_ID = 0;
 	public static final String GUI_TEXTURE_ENERTREEFURNACE = "enerTreeFurnaceGui.png";
 	
+	public static final int GUI_MUTATINATOR_ID = 1;
+	public static final String GUI_TEXTURE_MUTATINATOR = "mutatinatorGui.png";
+	
 
 }

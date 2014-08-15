@@ -1,4 +1,6 @@
-package com.juicegrape.biodynamics.tileentity;
+package com.juicegrape.biodynamics.tileentity.containers;
+
+import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

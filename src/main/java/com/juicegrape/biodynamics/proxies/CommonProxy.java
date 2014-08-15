@@ -5,11 +5,13 @@ import net.minecraft.world.World;
 
 import com.juicegrape.biodynamics.blocks.BlockInfo;
 import com.juicegrape.biodynamics.client.guis.GuiInfo;
-import com.juicegrape.biodynamics.tileentity.ContainerEnerTreeFurnace;
 import com.juicegrape.biodynamics.tileentity.TileEntityBatteTreeCore;
 import com.juicegrape.biodynamics.tileentity.TileEntityCable;
 import com.juicegrape.biodynamics.tileentity.TileEntityEnerTreeFurnace;
+import com.juicegrape.biodynamics.tileentity.TileEntityMutatinator;
 import com.juicegrape.biodynamics.tileentity.TileEntitySoil;
+import com.juicegrape.biodynamics.tileentity.containers.ContainerEnerTreeFurnace;
+import com.juicegrape.biodynamics.tileentity.containers.ContainerMutatinator;
 import com.juicegrape.biodynamics.tileentity.generators.TileEntityBurningFlower;
 import com.juicegrape.biodynamics.tileentity.generators.TileEntitySolarFlower;
 
@@ -34,6 +36,7 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntitySolarFlower.class, BlockInfo.SOLARFLOWER);
 		GameRegistry.registerTileEntity(TileEntityCable.class, BlockInfo.CABLE);
 		GameRegistry.registerTileEntity(TileEntityBurningFlower.class, BlockInfo.BURNINGFLOWER);
+		GameRegistry.registerTileEntity(TileEntityMutatinator.class, BlockInfo.MUTATINATOR);
 	}
 
 	@Override
@@ -41,7 +44,10 @@ public class CommonProxy implements IGuiHandler {
 		switch(ID) {
 		case GuiInfo.GUI_ENERTREEFURNACE_ID:
 			return new ContainerEnerTreeFurnace(player.inventory ,(TileEntityEnerTreeFurnace)world.getTileEntity(x, y, z));
+		case GuiInfo.GUI_MUTATINATOR_ID:
+			return new ContainerMutatinator(player.inventory, (TileEntityMutatinator)world.getTileEntity(x, y, z));
 		default:
+			
 			return null;
 		}
 	}
