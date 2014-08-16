@@ -139,17 +139,49 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	}
 
 	@Override
-	public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-		return null;
-	}
+	public ItemStack decrStackSize(int par1, int par2)
+    {
+        if (this.slots[par1] != null)
+        {
+            ItemStack itemstack;
+
+            if (this.slots[par1].stackSize <= par2)
+            {
+                itemstack = this.slots[par1];
+                this.slots[par1] = null;
+                return itemstack;
+            }
+            else
+            {
+                itemstack = this.slots[par1].splitStack(par2);
+
+                if (this.slots[par1].stackSize == 0)
+                {
+                    this.slots[par1] = null;
+                }
+
+                return itemstack;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {return null;}
 
 	@Override
-	public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-		
-	}
+	public void setInventorySlotContents(int par1, ItemStack par2ItemStack){
+        this.slots[par1] = par2ItemStack;
+
+        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
+        {
+            par2ItemStack.stackSize = this.getInventoryStackLimit();
+        }
+
+    }
 
 	@Override
 	public String getInventoryName() {
