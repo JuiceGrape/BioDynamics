@@ -1,9 +1,5 @@
 package com.juicegrape.biodynamics.tileentity;
 
-import com.juicegrape.biodynamics.blocks.BlockMutatinator;
-import com.juicegrape.biodynamics.blocks.ModBlocks;
-
-import net.minecraft.block.BlockMushroom;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -11,25 +7,33 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+
+import com.juicegrape.biodynamics.blocks.ModBlocks;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityMutatinator extends TileEntity implements IEnergyHandler, IInventory {
 	
 	EnergyStorage battery = new EnergyStorage(500000);
 	
-	protected FluidTank redWaterTank = new FluidTank(8000);
-	protected FluidTank lavaTank = new FluidTank(8000);
+	public FluidTank redWaterTank = new FluidTank(8000);
+	public FluidTank lavaTank = new FluidTank(8000);
 	
 	protected ItemStack[] slots;
 	
 	String redWaterTankTag = "redWaterTank";
 	String lavaTankTag = "lavaTank";
 	
-	protected int burntime;
-	protected int maxBurntime;
-	protected int heat;
+	public int burntime;
+	public int maxBurntime;
+	public int heat;
 	public static final int maxHeat = 1000;
 	
 	String burntimeTag = "burntime";
@@ -51,17 +55,10 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	
 	@Override
 	public void updateEntity() {
-		if (up) {
-			returner+=0.1F;
-		} else {
-			returner-=0.1F;
-		}
+		super.updateEntity();
 		
-		if (returner >= 100.0F) {
-			up = false;
-		} else if (returner <= 0.0F) {
-			up = true;
-		}
+		System.out.println(this.getEnergyStored(null));
+		
 		
 	}
 	
@@ -70,7 +67,7 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		return 0;
+		return battery.receiveEnergy(maxReceive, simulate);
 	}
 
 	@Override
@@ -87,18 +84,18 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	}
 	
 	public float getScaledEnergyStored() {
-	//	return battery.getEnergyStored() / battery.getMaxEnergyStored() * 100.0F;
-		return returner;
+		return (float)battery.getEnergyStored() / (float)battery.getMaxEnergyStored() * 100.0F;
 	}
 	
 	public float getScaledHeatStored() {
-	//	return heat / maxHeat * 100.0F;
-		return returner;
+		return (float)heat / (float)maxHeat * 100.0F;
 	}
 	
 	public float getBurntimeScaled() {
-	//	return burntime / maxBurntime * 100.0F;
-		return returner;
+		if (maxBurntime == 0)
+			return 0F;
+		
+		return (float)burntime / (float)maxBurntime * 100.0F;
 	}
 	
 	@Override
@@ -194,6 +191,21 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 			return true;
 		
 		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void setEnergyStored(int energy) {
+		this.battery.setEnergyStored(energy);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void setRWstored(int amount) {
+		this.redWaterTank.setFluid(new FluidStack(ModBlocks.fluidRedstoneWater, amount));
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void setlavaStored(int amount) {
+		this.lavaTank.setFluid(new FluidStack(FluidRegistry.LAVA, amount));
 	}
 	
 	
