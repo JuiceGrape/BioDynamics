@@ -5,6 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.juicegrape.biodynamics.tileentity.TileEntityMutatinator;
@@ -136,5 +137,13 @@ public class ContainerMutatinator extends Container{
 		}
 				
 	}
+	
+	@Override
+	public boolean func_94530_a(ItemStack stack, Slot slot) {
+        if (slot.inventory instanceof TileEntityMutatinator) {
+        	return mutatinator.isItemValidForSlot(slot.slotNumber, stack);
+        }
+        return true;
+    }
 
 }
