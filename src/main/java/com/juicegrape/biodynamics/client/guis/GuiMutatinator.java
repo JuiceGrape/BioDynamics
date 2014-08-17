@@ -89,17 +89,20 @@ public class GuiMutatinator extends GuiContainer {
 		int ha = (int) (heatHeight * (mutatinator.getScaledHeatStored() / 100.0F));
 		int pa = (int) (powerHeight * (mutatinator.getScaledEnergyStored() / 100.0F));
 		int fa = (int) (fireHeight * (mutatinator.getBurntimeScaled() / 100.0F));
+		int la = (int) (tankHeight * (mutatinator.getLavaScaled() / 100.0F));
+		int ra = (int) (tankHeight * (mutatinator.getRWScaled() / 100.0F));
+		int aa = (int) (arrowHeight * (mutatinator.getWorkingTimeScaled() / 100.0F));
 		
 		this.drawTexturedModalRect(x + emptyHeatX, y + emptyHeatY + heatHeight - ha, heatX, heatHeight - ha, heatWidth, ha);
 		this.drawTexturedModalRect(x + emptyPowerX, y + emptyPowerY + powerHeight - pa, powerX, powerHeight - pa, powerWidth,pa);
-		this.drawTexturedModalRect(x + emptyArrowX, y + emptyArrowY, arrowX, 0, arrowWidth, arrowHeight);
+		this.drawTexturedModalRect(x + emptyArrowX, y + emptyArrowY, arrowX, 0, arrowWidth, aa);
 		this.drawTexturedModalRect(x + emptyFireX, y + emptyFireY + fireHeight - fa, fireX, fireHeight - fa, fireWidth, fa);
 		
 		//TODO: add alpha levels to the fluids being rendered?
 		
 		this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-		this.drawTexturedModelRectFromIcon(x + lavaTankX, y + lavaTankY, Blocks.lava.getIcon(0, 0), tankWidth, tankHeight);
-		this.drawTexturedModelRectFromIcon(x + rwTankX, y + rwTankY, ModBlocks.redstoneWater.getIcon(0, 0), tankWidth, tankHeight);
+		this.drawTexturedModelRectFromIcon(x + lavaTankX, y + lavaTankY + tankHeight - la, Blocks.lava.getIcon(0, 0), tankWidth, la);
+		this.drawTexturedModelRectFromIcon(x + rwTankX, y + rwTankY + tankHeight - ra, ModBlocks.redstoneWater.getIcon(0, 0), tankWidth, ra);
 		
 		this.mc.getTextureManager().bindTexture(mutatinatorGuiTexture);
 		this.drawTexturedModalRect(x + lavaTankX, y + lavaTankY, tankX, 0, tankWidth, tankHeight);

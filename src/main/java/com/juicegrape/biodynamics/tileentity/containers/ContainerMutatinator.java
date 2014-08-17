@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.juicegrape.biodynamics.tileentity.TileEntityMutatinator;
+import com.juicegrape.biodynamics.tileentity.containers.slots.SlotLiquidContainer;
+import com.juicegrape.biodynamics.tileentity.containers.slots.SlotOutput;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,24 +26,25 @@ public class ContainerMutatinator extends Container{
 	lastHeat,
 	lastEnergy,
 	lastRedWater,
-	lastLava;
+	lastLava,
+	lastWorkingTime;
 	
 	
 	public ContainerMutatinator(InventoryPlayer player, TileEntityMutatinator mutate) {
 		this.player = player;
 		mutatinator = mutate;
 		
-		this.addSlotToContainer(new Slot(mutate, 0, 8, 53));
-		this.addSlotToContainer(new Slot(mutate, 1, 8, 98));
-		this.addSlotToContainer(new Slot(mutate, 2, 29, 53));
-		this.addSlotToContainer(new Slot(mutate, 3, 29, 98));
+		this.addSlotToContainer(new SlotLiquidContainer(mutate, 0, 8, 53));
+		this.addSlotToContainer(new SlotOutput(mutate, 1, 8, 98));
+		this.addSlotToContainer(new SlotLiquidContainer(mutate, 2, 29, 53));
+		this.addSlotToContainer(new SlotOutput(mutate, 3, 29, 98));
 		this.addSlotToContainer(new Slot(mutate, 4, 80, 68));
 		this.addSlotToContainer(new Slot(mutate, 5, 51, 51));
 		this.addSlotToContainer(new Slot(mutate, 6, 57, 26));
 		this.addSlotToContainer(new Slot(mutate, 7, 80, 15));
 		this.addSlotToContainer(new Slot(mutate, 8, 103, 26));
 		this.addSlotToContainer(new Slot(mutate, 9, 109, 51));
-		this.addSlotToContainer(new Slot(mutate, 10, 80, 107));
+		this.addSlotToContainer(new SlotOutput(mutate, 10, 80, 107));
 		this.addSlotToContainer(new Slot(mutate, 11, 152, 107));
 		
 		for (int i = 0; i < 3; ++i) {
@@ -71,6 +74,7 @@ public class ContainerMutatinator extends Container{
 		crafter.sendProgressBarUpdate(this, 3, this.mutatinator.getEnergyStored(ForgeDirection.UNKNOWN));
 		crafter.sendProgressBarUpdate(this, 4, this.mutatinator.redWaterTank.getFluidAmount());
 		crafter.sendProgressBarUpdate(this, 5, this.mutatinator.lavaTank.getFluidAmount());
+		crafter.sendProgressBarUpdate(this, 6, mutatinator.workingTime);
 	}
 	
 	@Override
@@ -96,6 +100,9 @@ public class ContainerMutatinator extends Container{
 			if (lastLava != mutatinator.lavaTank.getFluidAmount())
 				crafter.sendProgressBarUpdate(this, 5, mutatinator.lavaTank.getFluidAmount());
 			
+			if (lastWorkingTime != mutatinator.workingTime)
+				crafter.sendProgressBarUpdate(this, 6, mutatinator.workingTime);
+			
 			
 			
 			
@@ -107,6 +114,7 @@ public class ContainerMutatinator extends Container{
 		lastEnergy = mutatinator.getEnergyStored(ForgeDirection.UNKNOWN);
 		lastRedWater = mutatinator.redWaterTank.getFluidAmount();
 		lastLava = mutatinator.lavaTank.getFluidAmount();
+		lastWorkingTime = mutatinator.workingTime;
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -130,6 +138,9 @@ public class ContainerMutatinator extends Container{
 		case 5:
 			this.mutatinator.setlavaStored(bar);
 			break;
+		case 6:
+			this.mutatinator.workingTime = bar;
+			break;
 		default:
 			System.out.println("Unkown ID");
 			break;
@@ -139,11 +150,8 @@ public class ContainerMutatinator extends Container{
 	}
 	
 	@Override
-	public boolean func_94530_a(ItemStack stack, Slot slot) {
-        if (slot.inventory instanceof TileEntityMutatinator) {
-        	return mutatinator.isItemValidForSlot(slot.slotNumber, stack);
-        }
-        return true;
-    }
+	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+		return null;
+	}
 
 }

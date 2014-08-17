@@ -4,13 +4,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.IFluidTank;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 
@@ -34,22 +37,22 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	public int burntime;
 	public int maxBurntime;
 	public int heat;
+	public int workingTime;
+	
 	public static final int maxHeat = 1000;
 	
 	String burntimeTag = "burntime";
 	String maxBurntimeTag = "maxBurntime";
 	String heatTag = "heat";
 	
-	private float returner;
-	boolean up;
 	
 	public TileEntityMutatinator() {
 		 slots = new ItemStack[12];
 		 burntime = 0;
 		 maxBurntime = 0;
 		 heat = 0;
-		 returner = 0.0F;
-		 up = true;
+		 redWaterTank.setFluid(new FluidStack(ModBlocks.fluidRedstoneWater, 0));
+		 lavaTank.setFluid(new FluidStack(FluidRegistry.LAVA, 0));
 	}
 
 	
@@ -57,8 +60,61 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	public void updateEntity() {
 		super.updateEntity();
 		
-		System.out.println(this.getEnergyStored(null));
-		
+		//lava tank
+		handleLiquid(FluidRegistry.LAVA, 0, 1, lavaTank);
+		/*if (slots[0] != null && FluidContainerRegistry.containsFluid(slots[0], new FluidStack(FluidRegistry.LAVA, 1000))) {
+			FluidStack fStack = FluidContainerRegistry.getFluidForFilledItem(slots[0]);
+			if (lavaTank.fill(fStack, false) == fStack.amount) {
+				boolean canfill = false;
+				if (slots[0].getItem().hasContainerItem(slots[0])) {
+					ItemStack containerItem = slots[0].getItem().getContainerItem(slots[0]);
+					if (slots[1] == null) {
+						slots[1] = containerItem;
+						slots[0] = null;
+						canfill = true;
+					} else if (slots[1].getItem().equals(containerItem.getItem()) && slots[1].getItemDamage() == containerItem.getItemDamage()) {
+						slots[1].stackSize++;
+						slots[0] = null;
+						canfill = true;
+					}
+				} else {
+					slots[0].stackSize--;
+					if (slots[0].stackSize == 0)
+						slots[0] = null;
+					canfill = true;
+				}
+				if (canfill)
+					lavaTank.fill(fStack, true);
+			}
+	
+		} */
+		//redwater tank
+		handleLiquid(ModBlocks.fluidRedstoneWater, 2, 3, redWaterTank);
+		/*if (slots[2] != null && FluidContainerRegistry.containsFluid(slots[2], new FluidStack(ModBlocks.fluidRedstoneWater, 1000))) {
+			FluidStack fStack = FluidContainerRegistry.getFluidForFilledItem(slots[2]);
+			if (redWaterTank.fill(fStack, false) == fStack.amount) {
+				boolean canfill = false;
+				if (slots[2].getItem().hasContainerItem(slots[2])) {
+					ItemStack containerItem = slots[2].getItem().getContainerItem(slots[2]);
+					if (slots[3] == null) {
+						slots[3] = containerItem;
+						slots[2] = null;
+						canfill = true;
+					} else if (slots[3].getItem().equals(containerItem.getItem()) && slots[3].getItemDamage() == containerItem.getItemDamage()) {
+						slots[3].stackSize++;
+						slots[2] = null;
+						canfill = true;
+					}
+				} else {
+					slots[2].stackSize--;
+					if (slots[2].stackSize == 0)
+						slots[2] = null;
+					canfill = true;
+				}
+				if (canfill)
+					redWaterTank.fill(fStack, true);
+			}
+		}*/
 		
 	}
 	
@@ -98,6 +154,18 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		return (float)burntime / (float)maxBurntime * 100.0F;
 	}
 	
+	public float getRWScaled() {
+		return (float)redWaterTank.getFluidAmount() / (float)redWaterTank.getCapacity() * 100.0F;
+	}
+	
+	public float getLavaScaled() {
+		return (float)lavaTank.getFluidAmount() / (float)lavaTank.getCapacity() * 100.0F;
+	}
+	
+	public float getWorkingTimeScaled() {
+		return (float)workingTime;
+	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
@@ -109,6 +177,19 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		burntime = nbt.getInteger(burntimeTag);
 		maxBurntime = nbt.getInteger(maxBurntimeTag);
 		heat = nbt.getInteger(heatTag);
+		
+		NBTTagList list = nbt.getTagList("Items", 10);
+		slots = new ItemStack[getSizeInventory()];
+		
+		for (int i = 0; i < list.tagCount(); i++) {
+			NBTTagCompound compound = (NBTTagCompound)list.getCompoundTagAt(i);
+			int slot = compound.getByte("Slot") & 255;
+			
+			if (slot >= 0 && slot < slots.length) {
+				slots[slot] = ItemStack.loadItemStackFromNBT(compound);
+			}
+		}
+		
 	}
 
 	@Override
@@ -125,6 +206,21 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		nbt.setInteger(burntimeTag, burntime);
 		nbt.setInteger(heatTag, heat);
 		nbt.setInteger(maxBurntimeTag, maxBurntime);
+		
+		NBTTagList list = new NBTTagList();
+		
+		for (int i = 0; i < slots.length; i++) {
+			if (slots[i] != null) {
+				NBTTagCompound comp = new NBTTagCompound();
+				comp.setByte("Slot", (byte)i);
+				slots[i].writeToNBT(comp);
+				list.appendTag(comp);
+			}
+		}
+		
+		nbt.setTag("Items", list);
+		
+		
 		
 	}
 
@@ -215,8 +311,9 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		case 4:
 			return false;
 		case 0:
+			return FluidContainerRegistry.containsFluid(stack, new FluidStack(FluidRegistry.LAVA, 1000));
 		case 2:
-			return true;
+			return FluidContainerRegistry.containsFluid(stack, new FluidStack(ModBlocks.fluidRedstoneWater, 1000));
 		case 11:
 			return TileEntityFurnace.isItemFuel(stack);
 		default:
@@ -238,6 +335,35 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	@SideOnly(Side.CLIENT)
 	public void setlavaStored(int amount) {
 		this.lavaTank.setFluid(new FluidStack(FluidRegistry.LAVA, amount));
+	}
+	
+	protected void handleLiquid(Fluid fluid, int inputSlot, int outputSlot, IFluidTank tank) {
+		if (slots[inputSlot] != null && FluidContainerRegistry.containsFluid(slots[inputSlot], new FluidStack(fluid, 1000))) {
+			FluidStack fStack = FluidContainerRegistry.getFluidForFilledItem(slots[inputSlot]);
+			if (tank.fill(fStack, false) == fStack.amount) {
+				boolean canfill = false;
+				if (slots[inputSlot].getItem().hasContainerItem(slots[inputSlot])) {
+					ItemStack containerItem = slots[inputSlot].getItem().getContainerItem(slots[inputSlot]);
+					if (slots[outputSlot] == null) {
+						slots[outputSlot] = containerItem;
+						slots[inputSlot] = null;
+						canfill = true;
+					} else if (slots[outputSlot].getItem().equals(containerItem.getItem()) && slots[outputSlot].getItemDamage() == containerItem.getItemDamage()) {
+						slots[outputSlot].stackSize++;
+						slots[inputSlot] = null;
+						canfill = true;
+					}
+				} else {
+					slots[inputSlot].stackSize--;
+					if (slots[inputSlot].stackSize == 0)
+						slots[inputSlot] = null;
+					canfill = true;
+				}
+				if (canfill)
+					tank.fill(fStack, true);
+			}
+	
+		}
 	}
 	
 	
