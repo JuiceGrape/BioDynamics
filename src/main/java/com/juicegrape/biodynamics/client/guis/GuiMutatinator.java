@@ -74,6 +74,21 @@ public class GuiMutatinator extends GuiContainer {
 		String drawString = mutatinator.getInventoryName();
 		this.fontRendererObj.drawString(drawString, this.xSize / 2 - this.fontRendererObj.getStringWidth(drawString) / 2, 6, 4210752);
 		
+		//System.out.println("x =" + mouseX);
+		//System.out.println("y =" + mouseY);
+		
+		this.handleOverlayRender(mouseX, mouseY);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	}
@@ -109,6 +124,41 @@ public class GuiMutatinator extends GuiContainer {
 		this.drawTexturedModalRect(x + rwTankX, y + rwTankY, tankX, 0, tankWidth, tankHeight);
 		
 		
+		
+		
+	}
+	
+	protected boolean isOverSquare(int mouseX, int mouseY, int x, int y, int width, int height) {
+		if (mouseX >= x && mouseX <= x + width) {
+			if (mouseY >= y && mouseY <= y + height) {
+				return true;
+			}
+		}
+		return false;
+	} 
+	
+	protected void handleOverlayRender(int mouseX, int mouseY) {
+		int mouseDrawX = mouseX - (this.width - this.xSize) / 2;
+		int mouseDrawY = mouseY - (this.height - this.ySize) / 2;
+		
+		
+		if (isOverSquare(mouseDrawX, mouseDrawY, lavaTankX, lavaTankY, tankWidth, tankHeight)) {
+			this.drawCreativeTabHoveringText(mutatinator.lavaTank.getFluidAmount() + " mB of lava", mouseDrawX, mouseDrawY);
+		}
+		
+		if (isOverSquare(mouseDrawX, mouseDrawY, rwTankX, rwTankY, tankWidth, tankHeight)) {
+			this.drawCreativeTabHoveringText(mutatinator.redWaterTank.getFluidAmount() + " mB of redstone water", mouseDrawX, mouseDrawY);
+		}
+		
+		if (isOverSquare(mouseDrawX, mouseDrawY, emptyHeatX, emptyHeatY, heatWidth, heatHeight)) {
+			this.drawCreativeTabHoveringText(mutatinator.heat + " °C", mouseDrawX, mouseDrawY);
+		}
+		
+		if (isOverSquare(mouseDrawX, mouseDrawY, emptyPowerX, emptyPowerY, powerWidth, powerHeight)) {
+			this.drawCreativeTabHoveringText(mutatinator.getEnergyStored(null) + " NE", mouseDrawX, mouseDrawY);
+		}
+		
+
 	}
 
 }

@@ -89,7 +89,7 @@ public class ContainerMutatinator extends Container{
 				crafter.sendProgressBarUpdate(this, 1, mutatinator.maxBurntime);
 			
 			if (lastHeat != mutatinator.heat)
-				crafter.sendProgressBarUpdate(this, 2, mutatinator.getEnergyStored(ForgeDirection.UNKNOWN));
+				crafter.sendProgressBarUpdate(this, 2, mutatinator.heat);
 			
 			if (lastEnergy != mutatinator.getEnergyStored(ForgeDirection.UNKNOWN))
 				crafter.sendProgressBarUpdate(this, 3, mutatinator.getEnergyStored(ForgeDirection.UNKNOWN));
