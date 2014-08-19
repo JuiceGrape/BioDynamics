@@ -2,14 +2,13 @@ package com.juicegrape.biodynamics.blocks.common;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
-import com.juicegrape.biodynamics.biodynamics;
-import com.juicegrape.biodynamics.items.ItemSpecialBonemeals;
 import com.juicegrape.biodynamics.items.ModItems;
 import com.juicegrape.biodynamics.items.common.BioBucket;
 import com.juicegrape.biodynamics.network.BucketHandler;
@@ -42,6 +41,20 @@ public class BioLiquid extends BlockFluidClassic {
 		BucketHandler.INSTANCE.buckets.put(this, bucket);
 		ModItems.buckets.add(bucket);
 		
+	}
+	
+	@Override
+	public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
+		if (world.getBlock(x, y, z).getMaterial().isLiquid())
+			return false;
+		return super.canDisplace(world, x, y, z);
+	}
+	
+	@Override
+	public boolean displaceIfPossible(World world, int x, int y, int z) {
+		if (world.getBlock(x, y, z).getMaterial().isLiquid())
+			return false;
+		return super.displaceIfPossible(world, x, y, z);
 	}
 
 }
