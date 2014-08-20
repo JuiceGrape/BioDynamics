@@ -151,21 +151,30 @@ public class ContainerMutatinator extends Container{
 	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber) {
-	/*	ItemStack stack = null;
+		ItemStack stack = null;
 		Slot slot = (Slot)inventorySlots.get(slotNumber);
 		
 		if (slot != null && slot.getHasStack()) {
 			ItemStack stack2 = slot.getStack();
 			stack = stack2.copy();
 			
-			if (slotNumber == 10) {
-				if (!this.mergeItemStack(stack2, 3, 39, true)) {
+			if (slotNumber < 12) {
+				if (!this.mergeItemStack(stack2, 12, 48, true)) {
 					return null;
 				}
 				slot.onSlotChange(stack2, stack);
 			}
-		} */
-		return null; //I NOW GET THIS
+			if (stack2.stackSize == 0) {
+				slot.putStack((ItemStack) null);
+			} else {
+				slot.onSlotChanged();
+			}
+			
+			if (stack.stackSize == stack2.stackSize) return null;
+			slot.onPickupFromSlot(player, stack2);
+		} 
+		
+		return stack;
 	}
 
 }
