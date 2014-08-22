@@ -6,8 +6,13 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
+import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.tileentity.TileEntityMutatinator;
 import com.juicegrape.biodynamics.tileentity.containers.slots.SlotLiquidContainer;
 import com.juicegrape.biodynamics.tileentity.containers.slots.SlotOutput;
@@ -163,13 +168,27 @@ public class ContainerMutatinator extends Container{
 					return null;
 				}
 				slot.onSlotChange(stack2, stack);
+			} else {
+				if (FluidContainerRegistry.isFilledContainer(stack2) && FluidContainerRegistry.containsFluid(stack2, new FluidStack(FluidRegistry.LAVA, 1000)) && mergeItemStack(stack2, 0, 1, false)) {
+				} else if (FluidContainerRegistry.isFilledContainer(stack2) && FluidContainerRegistry.containsFluid(stack2, new FluidStack(ModBlocks.fluidRedstoneWater, 1000)) && mergeItemStack(stack2, 2, 3, false)) {
+
+				} else if (TileEntityFurnace.isItemFuel(stack2) && mergeItemStack(stack2, 11, 12, false)) {
+					
+				} else if (!mergeItemStack(stack2, 4, 10, false))
+					return null;
+				slot.onSlotChange(stack2, stack);
 			}
+			
+			
+			
+			
+			
+		
 			if (stack2.stackSize == 0) {
 				slot.putStack((ItemStack) null);
 			} else {
 				slot.onSlotChanged();
 			}
-			
 			if (stack.stackSize == stack2.stackSize) return null;
 			slot.onPickupFromSlot(player, stack2);
 		} 

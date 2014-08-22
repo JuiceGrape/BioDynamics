@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.ibm.icu.text.NumberFormat;
 import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.config.ConfigHandler;
 import com.juicegrape.biodynamics.items.ModItems;
@@ -49,6 +50,7 @@ public class biodynamics {
 		}
 
 	};
+	
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -78,6 +80,7 @@ public class biodynamics {
 		ModItems.initOreDict();
 		
 		proxy.initRenderers();
+		
 
 	}
 

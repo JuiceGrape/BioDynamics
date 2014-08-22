@@ -16,7 +16,7 @@ public class BlockEnergyCable extends BioTileEntityBlock {
 	protected BlockEnergyCable(String name) {
 		super(Material.iron, name);
 		setBlockName(BlockInfo.CABLE);
-		float minBound = 0.0625F * 3F;
+		float minBound = 0.0625F * 4F;
 		float maxBound = 1F - minBound;
 		this.setBlockBounds(minBound, minBound, minBound, maxBound, maxBound, maxBound);
 	}

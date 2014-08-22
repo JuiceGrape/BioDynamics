@@ -7,30 +7,31 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 
 import com.juicegrape.biodynamics.blocks.ModBlocks;
+import com.juicegrape.biodynamics.misc.ForgeDirectionSidedHelper;
+import com.juicegrape.biodynamics.tileentity.common.SpecificTank;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TileEntityMutatinator extends TileEntity implements IEnergyHandler, IInventory {
+public class TileEntityMutatinator extends TileEntity implements IEnergyHandler, IInventory, IFluidHandler {
 	
 	EnergyStorage battery = new EnergyStorage(100000);
 	
-	public FluidTank redWaterTank = new FluidTank(8000);
-	public FluidTank lavaTank = new FluidTank(8000);
+	public FluidTank redWaterTank = new SpecificTank(ModBlocks.fluidRedstoneWater, 8000); 
+	public FluidTank lavaTank = new SpecificTank(FluidRegistry.LAVA, 8000);
 	
 	protected ItemStack[] slots;
 	
@@ -373,6 +374,65 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 			}
 	
 		}
+	}
+
+
+	@Override
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+		if (from == getLeft()) {
+			return lavaTank.fill(resource, doFill);
+		} else if (from == getRight()) {
+			return redWaterTank.fill(resource, doFill);
+		}
+		return 0;
+	}
+
+
+	@Override
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+		return null;
+		
+	}
+
+
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		return null;
+	}
+
+
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid) {
+		if (from == getLeft() && fluid == FluidRegistry.LAVA) {
+			return true;
+		} else if (from == getRight() && fluid == ModBlocks.fluidRedstoneWater) {
+			return true;
+		}
+		return false;
+	}
+
+
+	@Override
+	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+		return false;
+	}
+
+
+	@Override
+	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+		return new FluidTankInfo[] {lavaTank.getInfo(), redWaterTank.getInfo()};
+	}
+	
+	public ForgeDirection getFacing() {
+		return ForgeDirectionSidedHelper.getFacingFromInt(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+	}
+	
+	public ForgeDirection getLeft() {
+		return ForgeDirectionSidedHelper.getLeftFromFacing(getFacing());
+	}
+	
+	public ForgeDirection getRight() {
+		return ForgeDirectionSidedHelper.getRightFromFacing(getFacing());
 	}
 	
 	

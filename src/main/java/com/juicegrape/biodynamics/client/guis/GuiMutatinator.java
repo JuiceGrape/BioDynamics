@@ -1,20 +1,19 @@
 package com.juicegrape.biodynamics.client.guis;
 
+import java.text.DecimalFormat;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.RenderBlockFluid;
 
 import org.lwjgl.opengl.GL11;
 
+import com.juicegrape.biodynamics.biodynamics;
 import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.tileentity.TileEntityMutatinator;
 import com.juicegrape.biodynamics.tileentity.containers.ContainerMutatinator;
-
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class GuiMutatinator extends GuiContainer {
 	
@@ -50,6 +49,8 @@ public class GuiMutatinator extends GuiContainer {
 	emptyFireY = 91;
 	
 	
+	String pattern = "###,###.###";
+	DecimalFormat decimalFormat = new DecimalFormat(pattern);
 	
 	
 	
@@ -142,20 +143,22 @@ public class GuiMutatinator extends GuiContainer {
 		int mouseDrawY = mouseY - (this.height - this.ySize) / 2;
 		
 		
+
+		
 		if (isOverSquare(mouseDrawX, mouseDrawY, lavaTankX, lavaTankY, tankWidth, tankHeight)) {
-			this.drawCreativeTabHoveringText(mutatinator.lavaTank.getFluidAmount() + " mB of lava", mouseDrawX, mouseDrawY);
+			this.drawCreativeTabHoveringText(decimalFormat.format((double)mutatinator.lavaTank.getFluidAmount()) + " mB of lava", mouseDrawX, mouseDrawY);
 		}
 		
 		if (isOverSquare(mouseDrawX, mouseDrawY, rwTankX, rwTankY, tankWidth, tankHeight)) {
-			this.drawCreativeTabHoveringText(mutatinator.redWaterTank.getFluidAmount() + " mB of redstone water", mouseDrawX, mouseDrawY);
+			this.drawCreativeTabHoveringText(decimalFormat.format(mutatinator.redWaterTank.getFluidAmount()) + " mB of redstone water", mouseDrawX, mouseDrawY);
 		}
 		
 		if (isOverSquare(mouseDrawX, mouseDrawY, emptyHeatX, emptyHeatY, heatWidth, heatHeight)) {
-			this.drawCreativeTabHoveringText(mutatinator.heat + " °C", mouseDrawX, mouseDrawY);
+			this.drawCreativeTabHoveringText(decimalFormat.format(mutatinator.heat) + " °C", mouseDrawX, mouseDrawY);
 		}
 		
 		if (isOverSquare(mouseDrawX, mouseDrawY, emptyPowerX, emptyPowerY, powerWidth, powerHeight)) {
-			this.drawCreativeTabHoveringText(mutatinator.getEnergyStored(null) + " NE", mouseDrawX, mouseDrawY);
+			this.drawCreativeTabHoveringText(decimalFormat.format(mutatinator.getEnergyStored(null)) + " NE", mouseDrawX, mouseDrawY);
 		}
 		
 
