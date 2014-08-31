@@ -80,7 +80,6 @@ public class ItemSpecialBonemeals extends BioItem {
 			if (entityItem.worldObj.getBlock((int)x, (int)y, (int)z).equals(Blocks.water)
 					&& entityItem.worldObj.getBlockMetadata((int)x, (int)y, (int)z) == 0
 					) {
-				System.out.println("yes");
 				if (item.stackSize == 1) {
 					entityItem.setDead();
 				} else {
