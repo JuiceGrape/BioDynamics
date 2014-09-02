@@ -19,6 +19,10 @@ public class MutatorRecipe {
 	public boolean hasOtherInputs() {return getOtherMaterialAmounts() > 0;}
 	
 	public ItemStack getOutput() {return output;}
+	
+	public boolean isRecipeCorrect(ItemStack stack) {
+		return true;
+	}
 
 	
 	
