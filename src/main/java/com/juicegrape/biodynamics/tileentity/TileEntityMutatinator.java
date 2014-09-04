@@ -112,6 +112,7 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		
 		
 		
+		
 		//make sure levels don't go out of bounds
 		if (heat >= maxHeat) {
 			heat = maxHeat;

@@ -24,9 +24,11 @@ public class TileEntityCable extends TileEntity implements IEnergyHandler {
 			TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (te != null && te instanceof TileEntityCable) {
 				TileEntityCable cable = (TileEntityCable)te;
-				int combinedEnergy = (this.getEnergyStored(dir.getOpposite()) + cable.getEnergyStored(dir)) / 2;
-				this.setEnergyStored(combinedEnergy);
-				cable.setEnergyStored(combinedEnergy);
+				int energyOne = (this.getEnergyStored(dir.getOpposite()) + cable.getEnergyStored(dir)) / 2;
+				int energyTwo = energyOne;
+				//TODO: make sure it doesn't go over it's limits
+				this.setEnergyStored(energyOne);
+				cable.setEnergyStored(energyTwo);
 			}
 		}
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {

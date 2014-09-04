@@ -8,7 +8,7 @@ public class MutatorRecipe {
 	ItemStack[] otherInputs;
 	ItemStack output;
 	
-	public MutatorRecipe(ItemStack output, ItemStack main, ItemStack... others) {
+	public MutatorRecipe(ItemStack output, ItemStack main, int heat, int power, ItemStack... others) {
 		mainInput = main;
 		otherInputs = others;
 		this.output = output;
