@@ -15,7 +15,7 @@ public class SpecificTank extends FluidTank {
 	
 	@Override
     public int fill(FluidStack resource, boolean doFill) {
-		return resource.fluidID == specificFluid.getID() ? super.fill(resource, doFill) : 0;
+		return resource.getFluidID() == specificFluid.getID() ? super.fill(resource, doFill) : 0;
 	}
 	
 	

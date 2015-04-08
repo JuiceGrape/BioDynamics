@@ -2,6 +2,7 @@ BLOCKS:
 
 General:
 tile.battetree_core.name=Battetree Core
+tile.Mutatinator.name=Mutatinator
 
 Enertree:
 tile.enertree_sapling.name=Enertree Sapling

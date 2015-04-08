@@ -1,6 +1,9 @@
 package com.juicegrape.biodynamics.tileentity;
 
+import java.util.Iterator;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,6 +24,7 @@ import cofh.api.energy.IEnergyHandler;
 
 import com.juicegrape.biodynamics.blocks.ModBlocks;
 import com.juicegrape.biodynamics.misc.ForgeDirectionSidedHelper;
+import com.juicegrape.biodynamics.recipes.mutatinator.MutatorRecipe;
 import com.juicegrape.biodynamics.tileentity.common.SpecificTank;
 
 import cpw.mods.fml.relauncher.Side;
@@ -50,6 +54,8 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	String heatTag = "heat";
 	String workingTag = "workingTime";
 	
+	int reqWater = 500;
+	
 	
 	public TileEntityMutatinator() {
 		 slots = new ItemStack[12];
@@ -58,6 +64,8 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		 heat = 0;
 		 redWaterTank.setFluid(new FluidStack(ModBlocks.fluidRedstoneWater, 0));
 		 lavaTank.setFluid(new FluidStack(FluidRegistry.LAVA, 0));
+		 
+		 //for (int i = 0; i < slots.length; i++) { slots[i] = new ItemStack(Items.egg, i + 1); }
 	}
 
 	
@@ -107,6 +115,8 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		}
 		
 		
+		handleCrafting();
+		
 		
 		
 		
@@ -125,6 +135,101 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		//tick down burntime, always make this last
 		burntime--;
 		
+	}
+	
+	private void handleCrafting() {
+		if (slots[4] != null) {
+			Iterator<MutatorRecipe> itr = MutatorRecipe.recipes.iterator();
+			while (itr.hasNext()) {
+				MutatorRecipe recp = itr.next();
+				if (recp != null) {
+					if (recp.getHeat() <= this.heat && recp.getPower() <= this.battery.getEnergyStored() && reqWater <= this.redWaterTank.getFluidAmount()) {
+						if (slots[10] == null || (slots[10].stackSize < 64 && slots[10].isItemEqual(recp.getOutput())) ) {
+							if (recp.hasMainItem(slots[4])) {
+								//check if it needs extra items
+								if (recp.requiresExtraInput()) {
+									if (canCraft(recp)) {
+										//Check if it can output
+										if (slots[10] == null || (slots[10].stackSize < 64 && slots[10].isItemEqual(recp.getOutput())) ) {
+											//handle the crafting
+											slots[4].stackSize-=1;
+											if (slots[4].stackSize == 0)
+												slots[4] = null;
+											if (slots[10] == null) {
+												slots[10] = recp.getOutput();
+											} else {
+												slots[10].stackSize += 1;
+											}
+											for (int i = 5; i < 10; i++) {
+												if (slots[i] != null) {
+													slots[i].stackSize -= 1;
+													if (slots[i].stackSize <= 0)
+														slots[i] = null;
+												}
+											}
+											this.battery.extractEnergy(recp.getPower(), false);
+											this.redWaterTank.drain(reqWater, true);
+											return;
+										}
+									}
+								} else {
+									boolean hasItem = false;
+									for (int i = 5; i < 10; i++) {
+										if (slots[i] != null) {
+											hasItem = true;
+										}
+									}
+									//Doesn't require extra input
+									//handle the crafting
+									if (!hasItem){
+										slots[4].stackSize-=1;
+										if (slots[4].stackSize == 0)
+											slots[4] = null;
+										if (slots[10] == null) {
+											slots[10] = recp.getOutput();
+										} else {
+											slots[10].stackSize += 1;
+											}
+										this.battery.extractEnergy(recp.getPower(), false);
+										this.redWaterTank.drain(reqWater, true);
+										return;
+									}
+									
+								}
+							}
+						}
+					}
+					/*if (slots[10] == null || (slots[10].stackSize < 64 && slots[10].isItemEqual(recp.getOutput())) ) {
+						if (recp.hasMainItem(slots[4])) {
+							slots[4].stackSize-=1;
+							if (slots[4].stackSize == 0)
+								slots[4] = null;
+							if (slots[10] == null) {
+								slots[10] = recp.getOutput();
+							} else {
+								slots[10].stackSize += 1;
+							}
+						}
+					}*/
+				}
+			}
+		}
+	}
+	
+	private boolean canCraft(MutatorRecipe recp) {
+		int slotsused = 0;
+		for (int i = 5; i < 10; i++) {
+			if (slots[i] != null) {
+				slotsused++;
+				if (!recp.hasItem(slots[i])) {
+					return false;
+				}
+			}
+		}
+		if (slotsused != recp.getOtherRecipeLength()) {
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
@@ -434,6 +539,11 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	
 	public ForgeDirection getRight() {
 		return ForgeDirectionSidedHelper.getRightFromFacing(getFacing());
+	}
+	
+	private boolean hasRecipe() {
+		//for (int i = 0)
+		return false;
 	}
 	
 	

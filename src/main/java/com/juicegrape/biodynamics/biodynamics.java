@@ -16,6 +16,7 @@ import com.juicegrape.biodynamics.proxies.CommonProxy;
 import com.juicegrape.biodynamics.recipes.CommonRecipes;
 import com.juicegrape.biodynamics.recipes.IngotCrushRecipes;
 import com.juicegrape.biodynamics.recipes.OrganicIngotRecipe;
+import com.juicegrape.biodynamics.recipes.mutatinator.MutatorRecipe;
 import com.juicegrape.biodynamics.villagers.VillagerHandler;
 
 import cpw.mods.fml.common.Mod;
@@ -66,6 +67,7 @@ public class biodynamics {
 	public void init(FMLInitializationEvent event) {
 		
 		CommonRecipes.initCommonRecipes();
+		MutatorRecipe.init();
 		
 		proxy.registerTileEntities();
 		
