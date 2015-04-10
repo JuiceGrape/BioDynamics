@@ -33,6 +33,7 @@ public class BlockRedstoneWater extends BioLiquid {
 
 	public BlockRedstoneWater(Fluid fluid, String name) {
 		super(fluid, Material.water, name);
+		this.setTickRate(20);
 		fluid.setBlock(this);
 	}
 	
@@ -56,6 +57,7 @@ public class BlockRedstoneWater extends BioLiquid {
 		 super.updateTick(world, x, y, z, random);
 		 if (world.isRemote)
 			 return;
+		 System.out.println("TICK");
 		 int checkx = x + random.nextInt(10) - 4;
 		 int checky = y + 1;
 		 int checkz = z + random.nextInt(10) - 4;
@@ -74,7 +76,9 @@ public class BlockRedstoneWater extends BioLiquid {
 			 }
 			
 		 }
-		 
+		 if (!world.isBlockTickScheduledThisTick(x, y, z, this)) {
+			 world.scheduleBlockUpdate(x, y, z, this, this.tickRate);
+		 }
 		 
 		 
 		 

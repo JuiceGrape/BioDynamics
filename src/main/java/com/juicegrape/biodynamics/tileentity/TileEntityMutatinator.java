@@ -3,11 +3,13 @@ package com.juicegrape.biodynamics.tileentity;
 import java.util.Iterator;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -47,6 +49,8 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	public int heat;
 	public int workingTime;
 	
+	private static final int maxWorkingTime = 100;
+	
 	public static final int maxHeat = 1000;
 	
 	String burntimeTag = "burntime";
@@ -56,6 +60,8 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	
 	int reqWater = 500;
 	
+	protected MutatorRecipe currentRecp;
+	
 	
 	public TileEntityMutatinator() {
 		 slots = new ItemStack[12];
@@ -64,6 +70,9 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		 heat = 0;
 		 redWaterTank.setFluid(new FluidStack(ModBlocks.fluidRedstoneWater, 0));
 		 lavaTank.setFluid(new FluidStack(FluidRegistry.LAVA, 0));
+		 workingTime = 0;
+		 
+		 currentRecp = null;
 		 
 		 //for (int i = 0; i < slots.length; i++) { slots[i] = new ItemStack(Items.egg, i + 1); }
 	}
@@ -72,6 +81,7 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
+		//worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		
 		if (worldObj.isRemote)
 			return;
@@ -115,7 +125,17 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		}
 		
 		
-		handleCrafting();
+		if (handleCrafting()) {
+			if (currentRecp != null)
+				workingTime+= currentRecp.getSpeed();
+		} else if (workingTime > 0) {
+			workingTime = 0;
+			currentRecp = null;
+		}
+		
+		if (workingTime >= maxWorkingTime && currentRecp != null) {
+			craft(currentRecp);
+		}
 		
 		
 		
@@ -131,20 +151,22 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 			heat++;
 		}
 		
+		redWaterTank.fill(new FluidStack(ModBlocks.fluidRedstoneWater, 500), true);
+		
 		
 		//tick down burntime, always make this last
 		burntime--;
 		
 	}
 	
-	private void handleCrafting() {
+	private boolean handleCrafting() {
 		if (slots[4] != null) {
 			Iterator<MutatorRecipe> itr = MutatorRecipe.recipes.iterator();
 			while (itr.hasNext()) {
 				MutatorRecipe recp = itr.next();
 				if (recp != null) {
 					if (recp.getHeat() <= this.heat && recp.getPower() <= this.battery.getEnergyStored() && reqWater <= this.redWaterTank.getFluidAmount()) {
-						if (slots[10] == null || (slots[10].stackSize < 64 && slots[10].isItemEqual(recp.getOutput())) ) {
+						if ((slots[10] == null) || (slots[10].stackSize <= recp.getOutput().getMaxStackSize() - recp.getOutput().stackSize && slots[10].isItemEqual(recp.getOutput())) ) {
 							if (recp.hasMainItem(slots[4])) {
 								//check if it needs extra items
 								if (recp.requiresExtraInput()) {
@@ -152,24 +174,8 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 										//Check if it can output
 										if (slots[10] == null || (slots[10].stackSize < 64 && slots[10].isItemEqual(recp.getOutput())) ) {
 											//handle the crafting
-											slots[4].stackSize-=1;
-											if (slots[4].stackSize == 0)
-												slots[4] = null;
-											if (slots[10] == null) {
-												slots[10] = recp.getOutput();
-											} else {
-												slots[10].stackSize += 1;
-											}
-											for (int i = 5; i < 10; i++) {
-												if (slots[i] != null) {
-													slots[i].stackSize -= 1;
-													if (slots[i].stackSize <= 0)
-														slots[i] = null;
-												}
-											}
-											this.battery.extractEnergy(recp.getPower(), false);
-											this.redWaterTank.drain(reqWater, true);
-											return;
+											currentRecp = recp;
+											return true;
 										}
 									}
 								} else {
@@ -182,17 +188,8 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 									//Doesn't require extra input
 									//handle the crafting
 									if (!hasItem){
-										slots[4].stackSize-=1;
-										if (slots[4].stackSize == 0)
-											slots[4] = null;
-										if (slots[10] == null) {
-											slots[10] = recp.getOutput();
-										} else {
-											slots[10].stackSize += 1;
-											}
-										this.battery.extractEnergy(recp.getPower(), false);
-										this.redWaterTank.drain(reqWater, true);
-										return;
+										currentRecp = recp;
+										return true;
 									}
 									
 								}
@@ -214,6 +211,28 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 				}
 			}
 		}
+		return false;
+	}
+	
+	private void craft(MutatorRecipe recp) {
+		slots[4].stackSize-=1;
+		if (slots[4].stackSize == 0)
+			slots[4] = null;
+		if (slots[10] == null) {
+			slots[10] = recp.getOutput().copy();
+		} else {
+			slots[10].stackSize += recp.getOutput().stackSize;
+		}
+		for (int i = 5; i < 10; i++) {
+			if (slots[i] != null) {
+				slots[i].stackSize -= 1;
+				if (slots[i].stackSize <= 0)
+					slots[i] = null;
+			}
+		}
+		this.battery.extractEnergy(recp.getPower(), false);
+		this.redWaterTank.drain(reqWater, true);
+		workingTime = 0;
 	}
 	
 	private boolean canCraft(MutatorRecipe recp) {
@@ -277,7 +296,7 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	}
 	
 	public float getWorkingTimeScaled() {
-		return (float)workingTime;
+		return (float)workingTime / (float)maxWorkingTime * 100.0F;
 	}
 	
 	@Override
@@ -546,6 +565,20 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		return false;
 	}
 	
+	
+	/*@Override
+	    public Packet getDescriptionPacket() {
+	    	NBTTagCompound nbtTag = new NBTTagCompound();
+	    	writeToNBT(nbtTag);
+	    	return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbtTag);
+	    	
+	    }
+	    
+	    @Override
+	    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+	    	readFromNBT(pkt.func_148857_g());
+	    }
+	*/
 	
 
 }
