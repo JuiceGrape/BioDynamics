@@ -75,14 +75,16 @@ public class MutatorRecipe {
 		return false;
 	}
 
-	
+	public static void preInit() {
+		recipes = new ArrayList<MutatorRecipe>();
+	}
 	
 	public static void init() {
-		recipes = new ArrayList<MutatorRecipe>();
 		recipes.add(new MutatorRecipe("treeSapling", new ItemStack(ModBlocks.enerTreeSapling, 1), 150, 500).setSpeed(2));
 		recipes.add(new MutatorRecipe("treeSapling", new ItemStack(ModBlocks.enerTreeSapling, 2), 150, 500, new Object[] {
 			"treeSapling"
 		}).setSpeed(2));
+		
 	}
 	
 	

@@ -136,6 +136,17 @@ public class CommonRecipes {
 				Character.valueOf('d'), "gemDiamond"	
 		}));
 		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.mutatinator), new Object[] {
+			"III",
+			"TFT",
+			"gCg",
+			Character.valueOf('I'), new ItemStack(ModItems.craftingItem, 1, 1),
+			Character.valueOf('T'), new ItemStack(ModItems.craftingItem, 1, 10),
+			Character.valueOf('F'), Blocks.furnace,
+			Character.valueOf('g'), new ItemStack(ModItems.craftingItem, 1, 6),
+			Character.valueOf('C'), Items.cauldron
+		}));
+		
 		
 		ArmourToolRecipes.init();
 		

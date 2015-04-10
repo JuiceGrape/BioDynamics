@@ -59,13 +59,14 @@ public class biodynamics {
 
 		ModBlocks.init();
 		ModItems.init();
+		MutatorRecipe.preInit();
 		
 		OrganicIngotRecipe.initMap();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		
+		ModItems.initOreDict();
 		CommonRecipes.initCommonRecipes();
 		MutatorRecipe.init();
 		
@@ -79,7 +80,7 @@ public class biodynamics {
 		
 		VillagerHandler.init();
 		
-		ModItems.initOreDict();
+		
 		
 		proxy.initRenderers();
 		

@@ -27,7 +27,8 @@ public class ItemInfo {
 /*6*/		"organic_gold_nugget",
 /*7*/		"organic_gold_dust",
 /*8*/		"gold_dust",
-/*9*/		"pestle"
+/*9*/		"pestle",
+/*10*/		"craft_tank"
 	};
 	public static final String CRAFTINGITEM = "craftingitem";
 	
