@@ -147,7 +147,7 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 		if (heat >= maxHeat) {
 			heat = maxHeat;
 		}
-		System.out.println(worldObj.getBiomeGenForCoords(xCoord, zCoord).temperature);
+		//System.out.println(worldObj.getBiomeGenForCoords(xCoord, zCoord).temperature);
 		if (heat < 30.0f * worldObj.getBiomeGenForCoords(xCoord, zCoord).temperature) {
 			heat++;
 		}

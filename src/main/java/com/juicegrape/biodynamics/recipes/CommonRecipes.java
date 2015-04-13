@@ -147,6 +147,14 @@ public class CommonRecipes {
 			Character.valueOf('C'), Items.cauldron
 		}));
 		
+		GameRegistry.addRecipe(new ItemStack(ModItems.craftingItem, 1, 10), new Object[] {
+			" I ",
+			"IGI",
+			" I ",
+			Character.valueOf('I'), Items.iron_ingot,
+			Character.valueOf('G'), Blocks.glass
+		});
+		
 		
 		ArmourToolRecipes.init();
 		
