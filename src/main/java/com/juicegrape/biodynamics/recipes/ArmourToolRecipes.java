@@ -1,5 +1,6 @@
 package com.juicegrape.biodynamics.recipes;
 
+import com.juicegrape.biodynamics.items.ItemInfo;
 import com.juicegrape.biodynamics.items.ModItems;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -79,28 +80,28 @@ public class ArmourToolRecipes {
 	
 	public static void init() {
 		//pink diamond armour
-		addArmourRecipes(new ItemStack(ModItems.craftingItem, 1, 0),
+		addArmourRecipes(new ItemStack(ModItems.craftingItem, 1, ItemInfo.getCraftingItem("pink_diamond")),
 				new ItemStack(ModItems.pinkDiamondHelmet),
 				new ItemStack(ModItems.pinkDiamondBody),
 				new ItemStack(ModItems.pinkDiamondLegs),
 				new ItemStack(ModItems.pinkDiamondBoots));
 		
 		//organic iron armour
-		addArmourRecipes(new ItemStack(ModItems.craftingItem, 1, 1),
+		addArmourRecipes(new ItemStack(ModItems.craftingItem, 1, ItemInfo.getCraftingItem("organic_iron_ingot")),
 				new ItemStack(ModItems.organicIronHelmet),
 				new ItemStack(ModItems.organicIronBody),
 				new ItemStack(ModItems.organicIronLegs),
 				new ItemStack(ModItems.organicIronBoots));
 		
 		//organic gold armour
-		addArmourRecipes(new ItemStack(ModItems.craftingItem, 1, 5),
+		addArmourRecipes(new ItemStack(ModItems.craftingItem, 1, ItemInfo.getCraftingItem("organic_gold_ingot")),
 				new ItemStack(ModItems.organicGoldHelmet),
 				new ItemStack(ModItems.organicGoldBody),
 				new ItemStack(ModItems.organicGoldLegs),
 				new ItemStack(ModItems.organicGoldBoots));
 		
 		//pink diamond tools
-		addTools(new ItemStack(ModItems.craftingItem, 1, 0),
+		addTools(new ItemStack(ModItems.craftingItem, 1, ItemInfo.getCraftingItem("pink_diamond")),
 				new ItemStack(ModItems.pinkDiamondSword),
 				new ItemStack(ModItems.pinkDiamondAxe),
 				new ItemStack(ModItems.pinkDiamondShovel),
@@ -108,7 +109,7 @@ public class ArmourToolRecipes {
 				new ItemStack(ModItems.pinkDiamondHoe));
 		
 		//organic iron tools
-		addTools(new ItemStack(ModItems.craftingItem, 1, 1),
+		addTools(new ItemStack(ModItems.craftingItem, 1, ItemInfo.getCraftingItem("organic_iron_ingot")),
 				new ItemStack(ModItems.organicIronSword),
 				new ItemStack(ModItems.organicIronAxe),
 				new ItemStack(ModItems.organicIronShovel),
@@ -116,7 +117,7 @@ public class ArmourToolRecipes {
 				new ItemStack(ModItems.organicIronHoe));
 		
 		//organic gold tools
-		addTools(new ItemStack(ModItems.craftingItem, 1, 5),
+		addTools(new ItemStack(ModItems.craftingItem, 1, ItemInfo.getCraftingItem("organic_gold_ingot")),
 				new ItemStack(ModItems.organicGoldSword),
 				new ItemStack(ModItems.organicGoldAxe),
 				new ItemStack(ModItems.organicGoldShovel),

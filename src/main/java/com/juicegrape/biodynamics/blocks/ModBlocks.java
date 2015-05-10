@@ -33,6 +33,8 @@ public class ModBlocks {
 	public static Block mineralBlocks;
 	public static Block cableblock;
 	public static Block mutatinator;
+	public static Block naturalglass;
+	public static Block treefarm;
 	
 	
 	
@@ -80,6 +82,12 @@ public class ModBlocks {
 		
 		mutatinator = new BlockMutatinator(BlockInfo.MUTATINATOR);
 		GameRegistry.registerBlock(mutatinator, BlockInfo.MUTATINATOR);
+		
+		naturalglass = new BlockClearGlass(BlockInfo.CLEARGLASS);
+		GameRegistry.registerBlock(naturalglass, BlockInfo.CLEARGLASS);
+		
+		treefarm = new BlockTreeFarm(BlockInfo.TREEFARM);
+		GameRegistry.registerBlock(treefarm, BlockInfo.TREEFARM);
 		
 		addOreDict();
 		

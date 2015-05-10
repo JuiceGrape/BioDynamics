@@ -37,7 +37,11 @@ public class BlockInfo {
 	
 	public static final String CABLE = "energy_cable";
 	
-	public static final String MUTATINATOR = "Mutatinator";
+	public static final String MUTATINATOR = "mutatinator";
+	
+	public static final String CLEARGLASS = "natural_glass";
+	
+	public static final String TREEFARM = "bio_tree_farm";
 	
 	
 	

@@ -49,7 +49,7 @@ public class TileEntityMutatinator extends TileEntity implements IEnergyHandler,
 	public int heat;
 	public int workingTime;
 	
-	private static final int maxWorkingTime = 100;
+	private static final int maxWorkingTime = 500;
 	
 	public static final int maxHeat = 1000;
 	

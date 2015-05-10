@@ -28,8 +28,19 @@ public class ItemInfo {
 /*7*/		"organic_gold_dust",
 /*8*/		"gold_dust",
 /*9*/		"pestle",
-/*10*/		"craft_tank"
+/*10*/		"craft_tank",
+/*11*/		"glass_dust",
+/*12*/		"organic_glass_dust"
 	};
+	
+	public static int getCraftingItem(String name) {
+		for (int i = 0; i < CRAFTINGITEMNAMES.length; i++) {
+			if (CRAFTINGITEMNAMES[i].equals(name)) {
+				return i;
+			}
+		}
+		return 0;
+	}
 	public static final String CRAFTINGITEM = "craftingitem";
 	
 	public static final String[] ORGANICIRONARMOUR = {"organic_iron_helmet", "organic_iron_body", "organic_iron_legs", "organic_iron_boots"};

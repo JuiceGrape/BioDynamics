@@ -170,17 +170,20 @@ public class ModItems {
 		
 		OreDictionary.registerOre("gemDiamond", new ItemStack(craftingItem));
 		
-		OreDictionary.registerOre("dustIron", new ItemStack(craftingItem, 1, 4));
-		OreDictionary.registerOre("dustGold", new ItemStack(craftingItem, 1, 8));
+		OreDictionary.registerOre("dustIron", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("iron_dust")));
+		OreDictionary.registerOre("dustGold", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("gold_dust")));
 		
-		OreDictionary.registerOre("dustOrganicIron", new ItemStack(craftingItem, 1, 3));
-		OreDictionary.registerOre("dustOrganicGold", new ItemStack(craftingItem, 1, 7));
+		OreDictionary.registerOre("dustOrganicIron", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("organic_iron_dust")));
+		OreDictionary.registerOre("dustOrganicGold", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("organic_gold_dust")));
 		
-		OreDictionary.registerOre("ingotOrganicIron", new ItemStack(craftingItem, 1, 1));
-		OreDictionary.registerOre("ingotOrganicGold", new ItemStack(craftingItem, 1, 5));
+		OreDictionary.registerOre("ingotOrganicIron", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("organic_iron_ingot")));
+		OreDictionary.registerOre("ingotOrganicGold", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("organic_gold_ingot")));
 		
-		OreDictionary.registerOre("nuggetOrganicIron", new ItemStack(craftingItem, 1, 2));
-		OreDictionary.registerOre("nuggetOrganicGold", new ItemStack(craftingItem, 1, 6));
+		OreDictionary.registerOre("nuggetOrganicIron", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("organic_iron_nugget")));
+		OreDictionary.registerOre("nuggetOrganicGold", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("organic_gold_nugget")));
+		
+		OreDictionary.registerOre("dustOrganicGlass", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("organic_glass_dust")));
+		OreDictionary.registerOre("dustGlass", new ItemStack(craftingItem, 1, ItemInfo.getCraftingItem("glass_dust")));
 	}
 
 }
